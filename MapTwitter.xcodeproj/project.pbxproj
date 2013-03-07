@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B09574C316E8059A00EFDBB2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B09574C216E8059A00EFDBB2 /* CoreLocation.framework */; };
 		B0AB6FBA16E7F17100EB71F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AB6FB916E7F17100EB71F5 /* UIKit.framework */; };
 		B0AB6FBC16E7F17100EB71F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AB6FBB16E7F17100EB71F5 /* Foundation.framework */; };
 		B0AB6FBE16E7F17100EB71F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AB6FBD16E7F17100EB71F5 /* CoreGraphics.framework */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B09574C216E8059A00EFDBB2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B0AB6FB616E7F17100EB71F5 /* MapTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0AB6FB916E7F17100EB71F5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B0AB6FBB16E7F17100EB71F5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -46,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B09574C316E8059A00EFDBB2 /* CoreLocation.framework in Frameworks */,
 				B0AB6FDD16E7F2C700EB71F5 /* MapKit.framework in Frameworks */,
 				B0AB6FBA16E7F17100EB71F5 /* UIKit.framework in Frameworks */,
 				B0AB6FBC16E7F17100EB71F5 /* Foundation.framework in Frameworks */,
@@ -56,9 +59,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B09574BE16E8026A00EFDBB2 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
+		B09574C416E810D100EFDBB2 /* Tweets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Tweets;
+			sourceTree = "<group>";
+		};
 		B0AB6FAD16E7F17100EB71F5 = {
 			isa = PBXGroup;
 			children = (
+				B09574C216E8059A00EFDBB2 /* CoreLocation.framework */,
 				B0AB6FDC16E7F2C700EB71F5 /* MapKit.framework */,
 				B0AB6FBF16E7F17100EB71F5 /* MapTwitter */,
 				B0AB6FB816E7F17100EB71F5 /* Frameworks */,
@@ -87,6 +105,8 @@
 		B0AB6FBF16E7F17100EB71F5 /* MapTwitter */ = {
 			isa = PBXGroup;
 			children = (
+				B09574C416E810D100EFDBB2 /* Tweets */,
+				B09574BE16E8026A00EFDBB2 /* Location */,
 				B0AB6FC816E7F17100EB71F5 /* MapTwitterAppDelegate.h */,
 				B0AB6FC916E7F17100EB71F5 /* MapTwitterAppDelegate.m */,
 				B0AB6FD116E7F17100EB71F5 /* MainStoryboard.storyboard */,
@@ -303,6 +323,7 @@
 				B0AB6FDB16E7F17100EB71F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

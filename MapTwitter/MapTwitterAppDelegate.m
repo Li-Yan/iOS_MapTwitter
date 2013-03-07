@@ -10,6 +10,13 @@
 
 @implementation MapTwitterAppDelegate
 
++ (void) Set_My_Coordinate: (CLLocationCoordinate2D) My_Coordinate {
+    myCoordinate = My_Coordinate;
+}
++ (CLLocationCoordinate2D) Get_My_Coordinate {
+    return myCoordinate;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
