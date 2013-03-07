@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B01CBF5516E81F5B004CE688 /* FHSTwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = B01CBF3E16E81F5B004CE688 /* FHSTwitterEngine.m */; };
+		B01CBF5616E81F5B004CE688 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = B01CBF4216E81F5B004CE688 /* NSString+URLEncoding.m */; };
+		B01CBF5716E81F5B004CE688 /* Base64TranscoderFHS.c in Sources */ = {isa = PBXBuildFile; fileRef = B01CBF4416E81F5B004CE688 /* Base64TranscoderFHS.c */; };
+		B01CBF5816E81F5B004CE688 /* OAAsynchronousDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B01CBF4716E81F5B004CE688 /* OAAsynchronousDataFetcher.m */; };
+		B01CBF5916E81F5B004CE688 /* OAConsumer.m in Sources */ = {isa = PBXBuildFile; fileRef = B01CBF4916E81F5B004CE688 /* OAConsumer.m */; };
+		B01CBF5A16E81F5B004CE688 /* OAHMAC_SHA1SignatureProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B01CBF4B16E81F5B004CE688 /* OAHMAC_SHA1SignatureProvider.m */; };
+		B01CBF5B16E81F5B004CE688 /* OAMutableURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B01CBF4D16E81F5B004CE688 /* OAMutableURLRequest.m */; };
+		B01CBF5C16E81F5B004CE688 /* OARequestParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = B01CBF4F16E81F5B004CE688 /* OARequestParameter.m */; };
+		B01CBF5D16E81F5B004CE688 /* OAServiceTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = B01CBF5116E81F5B004CE688 /* OAServiceTicket.m */; };
+		B01CBF5E16E81F5B004CE688 /* OAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = B01CBF5316E81F5B004CE688 /* OAToken.m */; };
 		B09574C316E8059A00EFDBB2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B09574C216E8059A00EFDBB2 /* CoreLocation.framework */; };
 		B0AB6FBA16E7F17100EB71F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AB6FB916E7F17100EB71F5 /* UIKit.framework */; };
 		B0AB6FBC16E7F17100EB71F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AB6FBB16E7F17100EB71F5 /* Foundation.framework */; };
@@ -23,6 +33,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B01CBF3D16E81F5B004CE688 /* FHSTwitterEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FHSTwitterEngine.h; sourceTree = "<group>"; };
+		B01CBF3E16E81F5B004CE688 /* FHSTwitterEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FHSTwitterEngine.m; sourceTree = "<group>"; };
+		B01CBF4116E81F5B004CE688 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		B01CBF4216E81F5B004CE688 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
+		B01CBF4416E81F5B004CE688 /* Base64TranscoderFHS.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64TranscoderFHS.c; sourceTree = "<group>"; };
+		B01CBF4516E81F5B004CE688 /* Base64TranscoderFHS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64TranscoderFHS.h; sourceTree = "<group>"; };
+		B01CBF4616E81F5B004CE688 /* OAAsynchronousDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAAsynchronousDataFetcher.h; sourceTree = "<group>"; };
+		B01CBF4716E81F5B004CE688 /* OAAsynchronousDataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAAsynchronousDataFetcher.m; sourceTree = "<group>"; };
+		B01CBF4816E81F5B004CE688 /* OAConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAConsumer.h; sourceTree = "<group>"; };
+		B01CBF4916E81F5B004CE688 /* OAConsumer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAConsumer.m; sourceTree = "<group>"; };
+		B01CBF4A16E81F5B004CE688 /* OAHMAC_SHA1SignatureProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAHMAC_SHA1SignatureProvider.h; sourceTree = "<group>"; };
+		B01CBF4B16E81F5B004CE688 /* OAHMAC_SHA1SignatureProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAHMAC_SHA1SignatureProvider.m; sourceTree = "<group>"; };
+		B01CBF4C16E81F5B004CE688 /* OAMutableURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAMutableURLRequest.h; sourceTree = "<group>"; };
+		B01CBF4D16E81F5B004CE688 /* OAMutableURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAMutableURLRequest.m; sourceTree = "<group>"; };
+		B01CBF4E16E81F5B004CE688 /* OARequestParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OARequestParameter.h; sourceTree = "<group>"; };
+		B01CBF4F16E81F5B004CE688 /* OARequestParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OARequestParameter.m; sourceTree = "<group>"; };
+		B01CBF5016E81F5B004CE688 /* OAServiceTicket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAServiceTicket.h; sourceTree = "<group>"; };
+		B01CBF5116E81F5B004CE688 /* OAServiceTicket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAServiceTicket.m; sourceTree = "<group>"; };
+		B01CBF5216E81F5B004CE688 /* OAToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAToken.h; sourceTree = "<group>"; };
+		B01CBF5316E81F5B004CE688 /* OAToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAToken.m; sourceTree = "<group>"; };
+		B01CBF5416E81F5B004CE688 /* OAuthConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthConsumer.h; sourceTree = "<group>"; };
 		B09574C216E8059A00EFDBB2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B0AB6FB616E7F17100EB71F5 /* MapTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0AB6FB916E7F17100EB71F5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -59,6 +90,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B01CBF3C16E81F5B004CE688 /* FHSTwitterEngine */ = {
+			isa = PBXGroup;
+			children = (
+				B01CBF3D16E81F5B004CE688 /* FHSTwitterEngine.h */,
+				B01CBF3E16E81F5B004CE688 /* FHSTwitterEngine.m */,
+				B01CBF3F16E81F5B004CE688 /* OAuthConsumer */,
+			);
+			path = FHSTwitterEngine;
+			sourceTree = "<group>";
+		};
+		B01CBF3F16E81F5B004CE688 /* OAuthConsumer */ = {
+			isa = PBXGroup;
+			children = (
+				B01CBF4016E81F5B004CE688 /* Categories */,
+				B01CBF4316E81F5B004CE688 /* Crytpo */,
+				B01CBF4616E81F5B004CE688 /* OAAsynchronousDataFetcher.h */,
+				B01CBF4716E81F5B004CE688 /* OAAsynchronousDataFetcher.m */,
+				B01CBF4816E81F5B004CE688 /* OAConsumer.h */,
+				B01CBF4916E81F5B004CE688 /* OAConsumer.m */,
+				B01CBF4A16E81F5B004CE688 /* OAHMAC_SHA1SignatureProvider.h */,
+				B01CBF4B16E81F5B004CE688 /* OAHMAC_SHA1SignatureProvider.m */,
+				B01CBF4C16E81F5B004CE688 /* OAMutableURLRequest.h */,
+				B01CBF4D16E81F5B004CE688 /* OAMutableURLRequest.m */,
+				B01CBF4E16E81F5B004CE688 /* OARequestParameter.h */,
+				B01CBF4F16E81F5B004CE688 /* OARequestParameter.m */,
+				B01CBF5016E81F5B004CE688 /* OAServiceTicket.h */,
+				B01CBF5116E81F5B004CE688 /* OAServiceTicket.m */,
+				B01CBF5216E81F5B004CE688 /* OAToken.h */,
+				B01CBF5316E81F5B004CE688 /* OAToken.m */,
+				B01CBF5416E81F5B004CE688 /* OAuthConsumer.h */,
+			);
+			path = OAuthConsumer;
+			sourceTree = "<group>";
+		};
+		B01CBF4016E81F5B004CE688 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				B01CBF4116E81F5B004CE688 /* NSString+URLEncoding.h */,
+				B01CBF4216E81F5B004CE688 /* NSString+URLEncoding.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		B01CBF4316E81F5B004CE688 /* Crytpo */ = {
+			isa = PBXGroup;
+			children = (
+				B01CBF4416E81F5B004CE688 /* Base64TranscoderFHS.c */,
+				B01CBF4516E81F5B004CE688 /* Base64TranscoderFHS.h */,
+			);
+			path = Crytpo;
+			sourceTree = "<group>";
+		};
 		B09574BE16E8026A00EFDBB2 /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +188,7 @@
 		B0AB6FBF16E7F17100EB71F5 /* MapTwitter */ = {
 			isa = PBXGroup;
 			children = (
+				B01CBF3C16E81F5B004CE688 /* FHSTwitterEngine */,
 				B09574C416E810D100EFDBB2 /* Tweets */,
 				B09574BE16E8026A00EFDBB2 /* Location */,
 				B0AB6FC816E7F17100EB71F5 /* MapTwitterAppDelegate.h */,
@@ -201,6 +285,16 @@
 				B0AB6FC616E7F17100EB71F5 /* main.m in Sources */,
 				B0AB6FCA16E7F17100EB71F5 /* MapTwitterAppDelegate.m in Sources */,
 				B0AB6FD616E7F17100EB71F5 /* MapTwitterViewController.m in Sources */,
+				B01CBF5516E81F5B004CE688 /* FHSTwitterEngine.m in Sources */,
+				B01CBF5616E81F5B004CE688 /* NSString+URLEncoding.m in Sources */,
+				B01CBF5716E81F5B004CE688 /* Base64TranscoderFHS.c in Sources */,
+				B01CBF5816E81F5B004CE688 /* OAAsynchronousDataFetcher.m in Sources */,
+				B01CBF5916E81F5B004CE688 /* OAConsumer.m in Sources */,
+				B01CBF5A16E81F5B004CE688 /* OAHMAC_SHA1SignatureProvider.m in Sources */,
+				B01CBF5B16E81F5B004CE688 /* OAMutableURLRequest.m in Sources */,
+				B01CBF5C16E81F5B004CE688 /* OARequestParameter.m in Sources */,
+				B01CBF5D16E81F5B004CE688 /* OAServiceTicket.m in Sources */,
+				B01CBF5E16E81F5B004CE688 /* OAToken.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
