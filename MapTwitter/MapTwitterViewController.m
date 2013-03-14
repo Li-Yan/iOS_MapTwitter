@@ -7,7 +7,7 @@
 //
 
 #import "MapTwitterViewController.h"
-#import "MapTwitterAppDelegate.h"
+#import "TwitterDeveloper.h"
 
 @interface MapTwitterViewController ()
 
@@ -19,6 +19,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    [self initMapView];
+    
+    TwitterDeveloper *twitter_developer = [[TwitterDeveloper alloc] initAsDeveloper];
+    NSString *tweetsSearchURL = @"https://api.twitter.com/1.1/search/tweets.json?q=";
+    tweetsSearchURL = [tweetsSearchURL stringByAppendingFormat:@"geocode=%f,%f,1mi", myCoordinate.latitude, myCoordinate.longitude];
+    //NSString *responseString = [twitter_developer tweetsSearch:tweetsSearchURL];
+    //NSLog(@"%@", responseString);
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -29,6 +37,9 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+}
+
+- (void) initMapView {
     CLLocationManager *locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.distanceFilter = kCLDistanceFilterNone;
@@ -38,7 +49,7 @@
     CLLocationCoordinate2D coordinate2D = locationManager.location.coordinate;
     coordinate2D.latitude = New_York_Latitude;
     coordinate2D.longitude = New_York_Longitude;
-    [MapTwitterAppDelegate Set_My_Coordinate:coordinate2D];
+    myCoordinate = coordinate2D;
     
     MKCoordinateSpan mySpan;
     mySpan.latitudeDelta = 0.006;
@@ -48,7 +59,6 @@
     myRegion.center = coordinate2D;
     myRegion.span = mySpan;
     [self.mapView setRegion:myRegion];
-    
 }
 
 @end

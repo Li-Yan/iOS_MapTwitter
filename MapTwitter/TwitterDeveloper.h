@@ -15,7 +15,7 @@
 @property (nonatomic, strong) NSString *access_token;
 @property (nonatomic, strong) NSString *access_token_secret;
 
--(TwitterDeveloper *) initAsDeveloper;
--(NSString *) tweetsSearch: (NSString *) URLString;
+- (TwitterDeveloper *) initAsDeveloper;
+- (NSString *) tweetsSearch: (NSString *) URLString;
 
 @end

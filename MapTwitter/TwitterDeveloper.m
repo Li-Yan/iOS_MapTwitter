@@ -19,7 +19,7 @@
 @synthesize access_token;
 @synthesize access_token_secret;
 
--(TwitterDeveloper *)initAsDeveloper {
+- (TwitterDeveloper *)initAsDeveloper {
     self = [super init];
     [self setConsumer_key:@"j1tFd2R0ww5S5ikVbaZNew"];
     [self setConsumer_secret:@"dDVPgML8W9aaSzX3UFSLeYNLwpiWbJQWpES62yz1kGA"];
@@ -28,7 +28,7 @@
     return self;
 }
 
--(NSString *) tweetsSearch:(NSString *)URLString {
+- (NSString *) tweetsSearch:(NSString *)URLString {
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     __block NSString *responseString = nil;
