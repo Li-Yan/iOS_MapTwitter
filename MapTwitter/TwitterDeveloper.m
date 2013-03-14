@@ -24,10 +24,11 @@
     return self;
 }
 
-- (NSString *) tweetsSearch:(NSString *)URLString GeoLocation:(CLLocationCoordinate2D) geocode {
+- (NSData *) tweetsSearch:(NSString *)URLString GeoLocation:(CLLocationCoordinate2D) geocode {
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-    __block NSString *responseString = nil;
+    __block NSString *tweetsString = nil;
+    __block NSData *tweetsData = nil;
     [account requestAccessToAccountsWithType:accountType options:nil completion:[^(BOOL granted, NSError *error)
     {
         if (granted)
@@ -39,17 +40,23 @@
             
             NSURL *requestURL = [NSURL URLWithString:URLString];
             NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-            NSString *geoString = [[NSString alloc] initWithFormat:@"%f,%f,5mi", geocode.latitude, geocode.longitude];
+            NSString *geoString = [[NSString alloc] initWithFormat:@"%f,%f,1mi", geocode.latitude, geocode.longitude];
             [parameters setObject:geoString forKey:@"geocode"];
+            [parameters setObject:@"100" forKey:@"count"];
+            [parameters setObject:@"apple" forKey:@"q"];
             SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:requestURL parameters:parameters];
             [request setAccount:twitter_account];
             [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+                tweetsString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+                tweetsData = responseData;
             }];
         }
     }copy]];
-    sleep(1);
-    return responseString;
+    while (tweetsData == nil)
+    {
+       sleep(1);
+    }
+    return tweetsData;
 }
 
 @end

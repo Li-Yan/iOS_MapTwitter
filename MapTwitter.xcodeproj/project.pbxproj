@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B01CBF6016E8202F004CE688 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01CBF5F16E8202F004CE688 /* SystemConfiguration.framework */; };
 		B090C4A416F1911C00CBC9E5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B090C4A316F1911C00CBC9E5 /* Accounts.framework */; };
 		B090C4A716F19FE100CBC9E5 /* TwitterDeveloper.m in Sources */ = {isa = PBXBuildFile; fileRef = B090C4A616F19FE100CBC9E5 /* TwitterDeveloper.m */; };
 		B09574C316E8059A00EFDBB2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B09574C216E8059A00EFDBB2 /* CoreLocation.framework */; };
@@ -60,7 +59,6 @@
 			files = (
 				B090C4A416F1911C00CBC9E5 /* Accounts.framework in Frameworks */,
 				B0ADC96C16E9460E0082EA4D /* Social.framework in Frameworks */,
-				B01CBF6016E8202F004CE688 /* SystemConfiguration.framework in Frameworks */,
 				B09574C316E8059A00EFDBB2 /* CoreLocation.framework in Frameworks */,
 				B0AB6FDD16E7F2C700EB71F5 /* MapKit.framework in Frameworks */,
 				B0AB6FBA16E7F17100EB71F5 /* UIKit.framework in Frameworks */,

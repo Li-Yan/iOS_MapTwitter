@@ -23,9 +23,18 @@
     
     TwitterDeveloper *twitter_developer = [[TwitterDeveloper alloc] initAsDeveloper];
     NSString *tweetsSearchURL = @"https://api.twitter.com/1.1/search/tweets.json?";
-    NSString *responseString = [twitter_developer tweetsSearch:tweetsSearchURL GeoLocation:myCoordinate];
-    NSLog(@"%@", responseString);
-
+    NSData *tweetsData = [twitter_developer tweetsSearch:tweetsSearchURL GeoLocation:myCoordinate];
+    NSError *error = nil;
+    NSDictionary *tweetsDic = [NSJSONSerialization JSONObjectWithData:tweetsData options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&error];
+    tweetsDic = [tweetsDic objectForKey:@"statuses"];
+    //NSLog(@"%@", tweetsDic);
+    int i = 0;
+    for (NSDictionary *subDic in tweetsDic) {
+        i++;
+        NSDictionary *subsubDic = nil;
+        subsubDic = [subDic objectForKey:@"geo"];
+        NSLog(@"Index: %d, %@", i, subsubDic);
+    }
 }
 
 - (void)didReceiveMemoryWarning
