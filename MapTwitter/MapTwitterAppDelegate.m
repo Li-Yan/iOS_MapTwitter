@@ -7,8 +7,14 @@
 //
 
 #import "MapTwitterAppDelegate.h"
+#import <Social/Social.h>
+#import <Accounts/Accounts.h>
+
+#import "TwitterDeveloper.h"
 
 @implementation MapTwitterAppDelegate
+
+@synthesize twitter_account_option;
 
 + (void) Set_My_Coordinate: (CLLocationCoordinate2D) My_Coordinate {
     myCoordinate = My_Coordinate;
@@ -20,6 +26,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    TwitterDeveloper *twitter_developer = [[TwitterDeveloper alloc] initAsDeveloper];
+    NSString *responseString = [twitter_developer tweetsSearch:@"https://api.twitter.com/1.1/search/tweets.json?q=%23freebandnames&since_id=24012619984051000&max_id=250126199840518145&result_type=mixed&count=4"];
+    NSLog(@"%@", responseString);
     return YES;
 }
 							
