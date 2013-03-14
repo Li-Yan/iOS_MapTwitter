@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B0015E1216F262100068C0EB /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = B0015E1116F262100068C0EB /* Tweet.m */; };
 		B090C4A416F1911C00CBC9E5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B090C4A316F1911C00CBC9E5 /* Accounts.framework */; };
 		B090C4A716F19FE100CBC9E5 /* TwitterDeveloper.m in Sources */ = {isa = PBXBuildFile; fileRef = B090C4A616F19FE100CBC9E5 /* TwitterDeveloper.m */; };
 		B09574C316E8059A00EFDBB2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B09574C216E8059A00EFDBB2 /* CoreLocation.framework */; };
@@ -26,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B0015E1016F262100068C0EB /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
+		B0015E1116F262100068C0EB /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
 		B01CBF5F16E8202F004CE688 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B090C4A316F1911C00CBC9E5 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		B090C4A516F19FE100CBC9E5 /* TwitterDeveloper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterDeveloper.h; sourceTree = "<group>"; };
@@ -70,18 +73,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B09574BE16E8026A00EFDBB2 /* Location */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Location;
-			sourceTree = "<group>";
-		};
 		B09574C416E810D100EFDBB2 /* Tweets */ = {
 			isa = PBXGroup;
 			children = (
 				B090C4A516F19FE100CBC9E5 /* TwitterDeveloper.h */,
 				B090C4A616F19FE100CBC9E5 /* TwitterDeveloper.m */,
+				B0015E1016F262100068C0EB /* Tweet.h */,
+				B0015E1116F262100068C0EB /* Tweet.m */,
 			);
 			name = Tweets;
 			sourceTree = "<group>";
@@ -123,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				B09574C416E810D100EFDBB2 /* Tweets */,
-				B09574BE16E8026A00EFDBB2 /* Location */,
 				B0AB6FC816E7F17100EB71F5 /* MapTwitterAppDelegate.h */,
 				B0AB6FC916E7F17100EB71F5 /* MapTwitterAppDelegate.m */,
 				B0AB6FD116E7F17100EB71F5 /* MainStoryboard.storyboard */,
@@ -219,6 +216,7 @@
 				B0AB6FCA16E7F17100EB71F5 /* MapTwitterAppDelegate.m in Sources */,
 				B0AB6FD616E7F17100EB71F5 /* MapTwitterViewController.m in Sources */,
 				B090C4A716F19FE100CBC9E5 /* TwitterDeveloper.m in Sources */,
+				B0015E1216F262100068C0EB /* Tweet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

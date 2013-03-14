@@ -7,7 +7,6 @@
 //
 
 #import "MapTwitterViewController.h"
-#import "TwitterDeveloper.h"
 
 @interface MapTwitterViewController ()
 
@@ -15,26 +14,15 @@
 
 @implementation MapTwitterViewController
 
+@synthesize tweets;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [self initMapView];
-    
-    TwitterDeveloper *twitter_developer = [[TwitterDeveloper alloc] initAsDeveloper];
-    NSString *tweetsSearchURL = @"https://api.twitter.com/1.1/search/tweets.json?";
-    NSData *tweetsData = [twitter_developer tweetsSearch:tweetsSearchURL GeoLocation:myCoordinate];
-    NSError *error = nil;
-    NSDictionary *tweetsDic = [NSJSONSerialization JSONObjectWithData:tweetsData options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&error];
-    tweetsDic = [tweetsDic objectForKey:@"statuses"];
-    //NSLog(@"%@", tweetsDic);
-    int i = 0;
-    for (NSDictionary *subDic in tweetsDic) {
-        i++;
-        NSDictionary *subsubDic = nil;
-        subsubDic = [subDic objectForKey:@"geo"];
-        NSLog(@"Index: %d, %@", i, subsubDic);
-    }
+    tweets = [[NSMutableArray alloc] init];
+    [self fetchTweets];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,7 +35,8 @@
 {
 }
 
-- (void) initMapView {
+- (void) initMapView
+{
     CLLocationManager *locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.distanceFilter = kCLDistanceFilterNone;
@@ -67,6 +56,25 @@
     myRegion.center = coordinate2D;
     myRegion.span = mySpan;
     [self.mapView setRegion:myRegion];
+}
+
+- (void)fetchTweets
+{
+    TwitterDeveloper *twitter_developer = [[TwitterDeveloper alloc] initAsDeveloper];
+    NSString *tweetsSearchURL = @"https://api.twitter.com/1.1/search/tweets.json?";
+    NSData *tweetsData = [twitter_developer tweetsSearch:tweetsSearchURL GeoLocation:myCoordinate];
+    NSError *error = nil;
+    NSDictionary *tweetsDic = [NSJSONSerialization JSONObjectWithData:tweetsData options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&error];
+    tweetsDic = [tweetsDic objectForKey:@"statuses"];
+    for (NSDictionary *subDic in tweetsDic) {
+        NSString *geoString = [[NSString alloc] initWithFormat:@"%@", [subDic objectForKey:@"geo"]];
+        if (![geoString isEqualToString:@"<null>"])
+            //Tweets that have "geo"
+        {
+            Tweet *tweet = [[Tweet alloc] initWithJSONDic:subDic];
+            [tweets addObject:tweets];
+        }
+    }
 }
 
 @end

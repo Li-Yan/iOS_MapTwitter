@@ -27,7 +27,6 @@
 - (NSData *) tweetsSearch:(NSString *)URLString GeoLocation:(CLLocationCoordinate2D) geocode {
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-    __block NSString *tweetsString = nil;
     __block NSData *tweetsData = nil;
     [account requestAccessToAccountsWithType:accountType options:nil completion:[^(BOOL granted, NSError *error)
     {
@@ -47,7 +46,6 @@
             SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:requestURL parameters:parameters];
             [request setAccount:twitter_account];
             [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                tweetsString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
                 tweetsData = responseData;
             }];
         }
