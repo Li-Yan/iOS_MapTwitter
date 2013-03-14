@@ -22,10 +22,9 @@
     [self initMapView];
     
     TwitterDeveloper *twitter_developer = [[TwitterDeveloper alloc] initAsDeveloper];
-    NSString *tweetsSearchURL = @"https://api.twitter.com/1.1/search/tweets.json?q=";
-    tweetsSearchURL = [tweetsSearchURL stringByAppendingFormat:@"geocode=%f,%f,1mi", myCoordinate.latitude, myCoordinate.longitude];
-    //NSString *responseString = [twitter_developer tweetsSearch:tweetsSearchURL];
-    //NSLog(@"%@", responseString);
+    NSString *tweetsSearchURL = @"https://api.twitter.com/1.1/search/tweets.json?";
+    NSString *responseString = [twitter_developer tweetsSearch:tweetsSearchURL GeoLocation:myCoordinate];
+    NSLog(@"%@", responseString);
 
 }
 

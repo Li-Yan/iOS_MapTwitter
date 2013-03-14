@@ -6,10 +6,6 @@
 //  Copyright (c) 2013 Li Yan. All rights reserved.
 //
 
-#import <Social/Social.h>
-#import <Accounts/Accounts.h>
-#import <unistd.h>
-
 #import "TwitterDeveloper.h"
 
 @implementation TwitterDeveloper
@@ -28,7 +24,7 @@
     return self;
 }
 
-- (NSString *) tweetsSearch:(NSString *)URLString {
+- (NSString *) tweetsSearch:(NSString *)URLString GeoLocation:(CLLocationCoordinate2D) geocode {
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     __block NSString *responseString = nil;
@@ -43,9 +39,9 @@
             
             NSURL *requestURL = [NSURL URLWithString:URLString];
             NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-            [parameters setObject:@"200" forKey:@"count"];
-            [parameters setObject:@"1" forKey:@"include_entities"];
-            SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:requestURL parameters:nil];
+            NSString *geoString = [[NSString alloc] initWithFormat:@"%f,%f,5mi", geocode.latitude, geocode.longitude];
+            [parameters setObject:geoString forKey:@"geocode"];
+            SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:requestURL parameters:parameters];
             [request setAccount:twitter_account];
             [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
                 responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];

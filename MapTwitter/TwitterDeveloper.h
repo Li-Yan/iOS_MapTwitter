@@ -7,6 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Social/Social.h>
+#import <Accounts/Accounts.h>
+#import <CoreLocation/CoreLocation.h>
+#import <unistd.h>
 
 @interface TwitterDeveloper : NSObject
 
@@ -16,6 +20,6 @@
 @property (nonatomic, strong) NSString *access_token_secret;
 
 - (TwitterDeveloper *) initAsDeveloper;
-- (NSString *) tweetsSearch: (NSString *) URLString;
+- (NSString *) tweetsSearch: (NSString *) URLString GeoLocation:(CLLocationCoordinate2D) geocode;
 
 @end

@@ -14,10 +14,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    TwitterDeveloper *twitter_developer = [[TwitterDeveloper alloc] initAsDeveloper];
-    NSString *tweetsSearchURL = @"https://api.twitter.com/1.1/search/tweets.json?geocode=37.781157,-122.398720,1mi";
-    NSString *responseString = [twitter_developer tweetsSearch:tweetsSearchURL];
-    NSLog(@"%@", responseString);
     return YES;
 }
 							
