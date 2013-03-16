@@ -19,6 +19,7 @@ static CLLocationCoordinate2D myCoordinate;
 static const double New_York_Latitude = 40.809520;
 static const double New_York_Longitude = -73.959319;
 static const double Meters_Per_Mile = 1609.344;
+static const double Search_Range = 1;                   //1 mile search range for tweets.
 
 @interface MapTwitterViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate>
 
@@ -26,6 +27,8 @@ static const double Meters_Per_Mile = 1609.344;
 @property (nonatomic, strong) NSMutableArray *tweets;
 
 - (void)initMapView;
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay;
 - (void)fetchTweets;
+
 
 @end

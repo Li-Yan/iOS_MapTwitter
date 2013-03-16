@@ -21,5 +21,6 @@
 
 - (TwitterDeveloper *) initAsDeveloper;
 - (NSData *) tweetsSearch: (NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode;
+- (NSData *) tweetsSearch: (NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode Range:(double) range;
 
 @end

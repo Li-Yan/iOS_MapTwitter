@@ -13,8 +13,7 @@
 @synthesize name;
 @synthesize text;
 @synthesize imageURL;
-@synthesize latitude;
-@synthesize longitude;
+@synthesize coordinate;
 
 - (Tweet *)initWithAll:(NSString *)Name Text:(NSString *)Text ImageURL:(NSString *)ImageURL Latitude:(double)Latitude Longitude:(double)Longitude {
     self = [super init];
@@ -22,8 +21,10 @@
     [self setName:Name];
     [self setText:Text];
     [self setImageURL:ImageURL];
-    [self setLatitude:Latitude];
-    [self setLongitude:Longitude];
+    CLLocationCoordinate2D tweetCoordinate;
+    tweetCoordinate.latitude = Latitude;
+    tweetCoordinate.longitude = Longitude;
+    [self setCoordinate:tweetCoordinate];
     
     return self;
 }
@@ -38,9 +39,11 @@
     [self setText:[[NSString alloc] initWithFormat:@"%@", [tweetDic objectForKey:@"text"]]];
     subDic = [tweetDic objectForKey:@"geo"];
     NSArray *array = [subDic objectForKey:@"coordinates"];
-    [self setLatitude:[[array objectAtIndex:0] doubleValue]];
-    [self setLongitude:[[array objectAtIndex:1] doubleValue]];
-    
+    CLLocationCoordinate2D tweetCoordinate;
+    tweetCoordinate.latitude = [[array objectAtIndex:0] doubleValue];
+    tweetCoordinate.longitude = [[array objectAtIndex:1] doubleValue];
+    [self setCoordinate:tweetCoordinate];
+    NSLog(@"%@", [self name]);
     return self;
 }
 

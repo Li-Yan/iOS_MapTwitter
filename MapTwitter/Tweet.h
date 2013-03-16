@@ -7,15 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
 
-@interface Tweet : NSObject
-
+@interface Tweet : NSObject <MKAnnotation>
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) NSString *imageURL;
-@property double latitude;
-@property double longitude;
+@property CLLocationCoordinate2D coordinate;
 
 - (Tweet *) initWithAll:(NSString *)Name Text:(NSString *)Text ImageURL:(NSString *)ImageURL Latitude:(double)Latitude Longitude:(double)Longitude;
 - (Tweet *) initWithJSONDic:(NSDictionary *)tweetDic;

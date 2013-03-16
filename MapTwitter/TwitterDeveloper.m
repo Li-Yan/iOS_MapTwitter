@@ -24,7 +24,7 @@
     return self;
 }
 
-- (NSData *) tweetsSearch:(NSString *)URLString GeoLocation:(CLLocationCoordinate2D) geocode {
+- (NSData *) tweetsSearch:(NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode Range:(double)range {
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     __block NSData *tweetsData = nil;
@@ -39,7 +39,7 @@
             
             NSURL *requestURL = [NSURL URLWithString:URLString];
             NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-            NSString *geoString = [[NSString alloc] initWithFormat:@"%f,%f,1mi", geocode.latitude, geocode.longitude];
+            NSString *geoString = [[NSString alloc] initWithFormat:@"%f,%f,%fmi", geocode.latitude, geocode.longitude, range];
             [parameters setObject:geoString forKey:@"geocode"];
             [parameters setObject:@"100" forKey:@"count"];
             [parameters setObject:@"apple" forKey:@"q"];
@@ -55,6 +55,10 @@
        sleep(1);
     }
     return tweetsData;
+}
+
+- (NSData *) tweetsSearch: (NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode {
+    return [self tweetsSearch:URLString GeoLocation:geocode Range:1];
 }
 
 @end
