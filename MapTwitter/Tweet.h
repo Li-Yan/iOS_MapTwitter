@@ -11,9 +11,13 @@
 
 @interface Tweet : NSObject <MKAnnotation>
 
+//Tweets
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) NSString *imageURL;
+
+//Map
+@property (nonatomic, strong) NSString *title;
 @property CLLocationCoordinate2D coordinate;
 
 - (Tweet *) initWithAll:(NSString *)Name Text:(NSString *)Text ImageURL:(NSString *)ImageURL Latitude:(double)Latitude Longitude:(double)Longitude;

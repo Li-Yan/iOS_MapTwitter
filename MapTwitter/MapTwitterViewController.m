@@ -25,6 +25,8 @@
     
     tweets = [[NSMutableArray alloc] init];
     [self fetchTweets];
+    
+    [self PlaceTweetsPin];
 }
 
 - (void)didReceiveMemoryWarning
@@ -99,6 +101,30 @@
         overlayView = cirView;
     }
     return overlayView;
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+{
+    static NSString *identifier = @"MapPin";
+    if([annotation isKindOfClass:[Tweet class]])
+    {
+        MKPinAnnotationView *newPin = (MKPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if(newPin == nil)
+        {
+            newPin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        }
+        else
+        {
+            [newPin setAnnotation:annotation];
+        }
+        
+        [newPin setEnabled:YES];
+        [newPin setPinColor:MKPinAnnotationColorGreen];
+        [newPin setCanShowCallout:YES];
+        [newPin setAnimatesDrop:YES];
+        return newPin;
+    }
+    return nil;
 }
 
 @end
