@@ -11,6 +11,7 @@
 		B090C4A416F1911C00CBC9E5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B090C4A316F1911C00CBC9E5 /* Accounts.framework */; };
 		B090C4A716F19FE100CBC9E5 /* TwitterDeveloper.m in Sources */ = {isa = PBXBuildFile; fileRef = B090C4A616F19FE100CBC9E5 /* TwitterDeveloper.m */; };
 		B09574C316E8059A00EFDBB2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B09574C216E8059A00EFDBB2 /* CoreLocation.framework */; };
+		B0A6687A16F51BDA009C9875 /* MapTwitter.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A6687916F51BDA009C9875 /* MapTwitter.png */; };
 		B0AB6FBA16E7F17100EB71F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AB6FB916E7F17100EB71F5 /* UIKit.framework */; };
 		B0AB6FBC16E7F17100EB71F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AB6FBB16E7F17100EB71F5 /* Foundation.framework */; };
 		B0AB6FBE16E7F17100EB71F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AB6FBD16E7F17100EB71F5 /* CoreGraphics.framework */; };
@@ -34,6 +35,7 @@
 		B090C4A516F19FE100CBC9E5 /* TwitterDeveloper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterDeveloper.h; sourceTree = "<group>"; };
 		B090C4A616F19FE100CBC9E5 /* TwitterDeveloper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterDeveloper.m; sourceTree = "<group>"; };
 		B09574C216E8059A00EFDBB2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B0A6687916F51BDA009C9875 /* MapTwitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapTwitter.png; sourceTree = SOURCE_ROOT; };
 		B0AB6FB616E7F17100EB71F5 /* MapTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0AB6FB916E7F17100EB71F5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B0AB6FBB16E7F17100EB71F5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -134,6 +136,7 @@
 		B0AB6FC016E7F17100EB71F5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B0A6687916F51BDA009C9875 /* MapTwitter.png */,
 				B0AB6FC116E7F17100EB71F5 /* MapTwitter-Info.plist */,
 				B0AB6FC216E7F17100EB71F5 /* InfoPlist.strings */,
 				B0AB6FC516E7F17100EB71F5 /* main.m */,
@@ -202,6 +205,7 @@
 				B0AB6FCE16E7F17100EB71F5 /* Default@2x.png in Resources */,
 				B0AB6FD016E7F17100EB71F5 /* Default-568h@2x.png in Resources */,
 				B0AB6FD316E7F17100EB71F5 /* MainStoryboard.storyboard in Resources */,
+				B0A6687A16F51BDA009C9875 /* MapTwitter.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
