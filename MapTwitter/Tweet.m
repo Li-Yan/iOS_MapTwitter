@@ -10,38 +10,29 @@
 
 @implementation Tweet
 
+@synthesize id_str;
 @synthesize name;
 @synthesize text;
 @synthesize imageURL;
+@synthesize image;
 @synthesize title;
 @synthesize coordinate;
-
-- (Tweet *)initWithAll:(NSString *)Name Text:(NSString *)Text ImageURL:(NSString *)ImageURL Latitude:(double)Latitude Longitude:(double)Longitude {
-    self = [super init];
-    
-    [self setName:Name];
-    [self setText:Text];
-    [self setImageURL:ImageURL];
-    
-    [self setTitle:[[NSString alloc] initWithFormat:@"%@@twitter", self.name]];
-    CLLocationCoordinate2D tweetCoordinate;
-    tweetCoordinate.latitude = Latitude;
-    tweetCoordinate.longitude = Longitude;
-    [self setCoordinate:tweetCoordinate];
-    
-    return self;
-}
 
 - (Tweet *)initWithJSONDic:(NSDictionary *)tweetDic {
     self = [super init];
     
     NSDictionary *subDic = nil;
+    [self setId_str:[[NSString alloc] initWithFormat:@"%@", [tweetDic objectForKey:@"id_str"]]];
+    NSLog(@"%@", self.id_str);
     subDic = [tweetDic objectForKey:@"user"];
     [self setName:[[NSString alloc] initWithFormat:@"%@", [subDic objectForKey:@"name"]]];
     [self setImageURL:[[NSString alloc] initWithFormat:@"%@", [subDic objectForKey:@"profile_image_url"]]];
     [self setText:[[NSString alloc] initWithFormat:@"%@", [tweetDic objectForKey:@"text"]]];
+    NSURL* url = [NSURL URLWithString:self.imageURL];
+    NSData* imageData = [[NSData alloc] initWithContentsOfURL:url];
+    [self setImage:[[UIImage alloc] initWithData:imageData]];
     
-    [self setTitle:[[NSString alloc] initWithFormat:@"%@@twitter", self.name]];
+    [self setTitle:[[NSString alloc] initWithFormat:@"%@", self.name]];
     subDic = [tweetDic objectForKey:@"geo"];
     NSArray *array = [subDic objectForKey:@"coordinates"];
     CLLocationCoordinate2D tweetCoordinate;

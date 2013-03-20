@@ -12,15 +12,16 @@
 @interface Tweet : NSObject <MKAnnotation>
 
 //Tweets
+@property (nonatomic, strong) NSString *id_str;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) NSString *imageURL;
+@property (nonatomic, strong) UIImage *image;
 
 //Map
 @property (nonatomic, strong) NSString *title;
 @property CLLocationCoordinate2D coordinate;
 
-- (Tweet *) initWithAll:(NSString *)Name Text:(NSString *)Text ImageURL:(NSString *)ImageURL Latitude:(double)Latitude Longitude:(double)Longitude;
 - (Tweet *) initWithJSONDic:(NSDictionary *)tweetDic;
 
 @end

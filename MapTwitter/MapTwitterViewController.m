@@ -59,6 +59,8 @@
     
     MKCircle *circle = [MKCircle circleWithCenterCoordinate:coordinate2D radius:Search_Range * Meters_Per_Mile];
     [self.mapView addOverlay:circle];
+    circle = [MKCircle circleWithCenterCoordinate:coordinate2D radius:17];
+    [self.mapView addOverlay:circle];
 }
 
 - (void)PlaceTweetsPin
@@ -97,6 +99,9 @@
         cirView.fillColor = [UIColor purpleColor];
         cirView.strokeColor = [UIColor purpleColor];
         cirView.alpha = 0.17;
+        if (((MKCircle *)overlay).radius <= 0.5 * Meters_Per_Mile) {
+            cirView.alpha = 1;
+        }
         cirView.lineWidth = 3.7;
         overlayView = cirView;
     }
@@ -108,21 +113,32 @@
     static NSString *identifier = @"MapPin";
     if([annotation isKindOfClass:[Tweet class]])
     {
-        MKPinAnnotationView *newPin = (MKPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-        if(newPin == nil)
+        MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if(annotationView == nil)
         {
-            newPin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
         }
         else
         {
-            [newPin setAnnotation:annotation];
+            [annotationView setAnnotation:annotation];
         }
         
-        [newPin setEnabled:YES];
-        [newPin setPinColor:MKPinAnnotationColorGreen];
-        [newPin setCanShowCallout:YES];
-        [newPin setAnimatesDrop:YES];
-        return newPin;
+        // Button
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        [button setFrame:CGRectMake(0, 0, 23, 23)];
+        annotationView.rightCalloutAccessoryView = button;
+        
+        // Image and two labels
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:((Tweet *)annotation).image];
+        [imageView setFrame:CGRectMake(0,0,23,23)];
+        annotationView.leftCalloutAccessoryView = imageView;
+        
+        [annotationView setPinColor:MKPinAnnotationColorGreen];
+        [annotationView setEnabled:YES];
+        [annotationView setCanShowCallout:YES];
+        [annotationView setAnimatesDrop:YES];
+        
+        return annotationView;
     }
     return nil;
 }

@@ -47,6 +47,8 @@
             [request setAccount:twitter_account];
             [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
                 tweetsData = responseData;
+                //NSString *tweetsString = [[NSString alloc] initWithData:tweetsData encoding:NSASCIIStringEncoding];
+                //NSLog(@"%@", tweetsString);
             }];
         }
     }copy]];
