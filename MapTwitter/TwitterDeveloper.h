@@ -12,7 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <unistd.h>
 
-#import "MapTwitterViewController.h"
+//#import "MapTwitterViewController.h"
 
 @interface TwitterDeveloper : NSObject
 
@@ -25,6 +25,7 @@
 - (NSData *) tweetsSearch:(NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode;
 - (NSData *) tweetsSearch:(NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode Range:(double) range;
 
-- (void) retweet:(NSString *)id_str;
+- (void)retweet:(NSString *)id_str;
+- (void)favoriteCreate:(NSString *)id_str;
 
 @end

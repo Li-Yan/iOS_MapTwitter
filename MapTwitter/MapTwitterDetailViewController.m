@@ -15,6 +15,7 @@
 @implementation MapTwitterDetailViewController
 
 @synthesize tweet;
+@synthesize developer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,6 +30,7 @@
 {
     self = [super init];
     [self setTweet:init_tweet];
+    [self setDeveloper:[[TwitterDeveloper alloc] initAsDeveloper]];
     return self;
 }
 
@@ -143,15 +145,14 @@
     NSString *messageString = [[NSString alloc] init];
     if (!tweet.retweeted)
     {
+        [developer retweet:tweet.id_str];
         messageString = @"Retweet Succeeds!";
         [MapTwitterViewController setRetweetState:tweet State:true];
         [self.retweetButton setBackgroundImage:[UIImage imageNamed:@"retweeted.png"] forState:UIControlStateNormal];
     }
     else
     {
-        messageString = @"Destroy Succeeds!";
-        [MapTwitterViewController setRetweetState:tweet State:false];
-        [self.retweetButton setBackgroundImage:[UIImage imageNamed:@"retweet.png"] forState:UIControlStateNormal];
+        messageString = @"Already Retweeted!";
     }
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Retweet Message" message:messageString delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
     [alertView show];

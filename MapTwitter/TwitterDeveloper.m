@@ -15,7 +15,8 @@
 @synthesize access_token;
 @synthesize access_token_secret;
 
-- (TwitterDeveloper *)initAsDeveloper {
+- (TwitterDeveloper *)initAsDeveloper
+{
     self = [super init];
     [self setConsumer_key:@"j1tFd2R0ww5S5ikVbaZNew"];
     [self setConsumer_secret:@"dDVPgML8W9aaSzX3UFSLeYNLwpiWbJQWpES62yz1kGA"];
@@ -24,7 +25,8 @@
     return self;
 }
 
-- (NSData *)tweetsSearch:(NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode Range:(double)range {
+- (NSData *)tweetsSearch:(NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode Range:(double)range
+{
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     __block NSData *tweetsData = nil;
@@ -57,6 +59,10 @@
                 NSLog(@"No available account!");
             }
         }
+        else
+        {
+            NSLog(@"Not granted!");
+        }
     }copy]];
     while (tweetsData == nil)
     {
@@ -65,7 +71,8 @@
     return tweetsData;
 }
 
-- (NSData *)tweetsSearch: (NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode {
+- (NSData *)tweetsSearch: (NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode
+{
     return [self tweetsSearch:URLString GeoLocation:geocode Range:1];
 }
 
@@ -73,7 +80,7 @@
 {
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-    [account requestAccessToAccountsWithType:accountType options:nil completion:[^(BOOL granted, NSError *error)
+    [account requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error)
     {
         if (granted)
         {
@@ -82,16 +89,52 @@
             ACAccountCredential *twitter_account_credential = [[ACAccountCredential alloc] initWithOAuthToken:self.access_token tokenSecret:self.access_token_secret];
             [twitter_account setCredential:twitter_account_credential];
             
-            NSString *URLString = [[NSString alloc] initWithFormat:@"https://api.twitter.com/1.1/statuses/retweet/:%@.json", id_str];
+            NSString *URLString = [[NSString alloc] initWithFormat:@"https://api.twitter.com/1.1/statuses/retweet/%@.json", id_str];
             NSURL *requestURL = [NSURL URLWithString:URLString];
-            NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-            SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodPOST URL:requestURL parameters:parameters];
+            SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodPOST URL:requestURL parameters:nil];
             [request setAccount:twitter_account];
-            [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
-            {
-            }];
+            [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {}];
         }
-    }copy]];
+        else
+        {
+            NSLog(@"Not granted!");
+        }
+    }];
+}
+
+- (void)favoriteCreate:(NSString *)id_str
+{
+    ACAccountStore *account = [[ACAccountStore alloc] init];
+    ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    [account requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error)
+    {
+        if (granted)
+        {
+            NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
+            if (arrayOfAccounts.count > 0)
+            {
+                ACAccount *twitter_account = [arrayOfAccounts objectAtIndex:0];
+                ACAccountCredential *twitter_account_credential = [[ACAccountCredential alloc] initWithOAuthToken:self.access_token tokenSecret:self.access_token_secret];
+                [twitter_account setCredential:twitter_account_credential];
+                
+                NSString *URLString = [[NSString alloc] initWithFormat:@"https://api.twitter.com/1.1/favorites/create.json"];
+                NSURL *requestURL = [NSURL URLWithString:URLString];
+                NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+                [parameters setObject:id_str forKey:@"id"];
+                SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodPOST URL:requestURL parameters:parameters];
+                [request setAccount:twitter_account];
+                [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {}];
+            }
+            else
+            {
+                NSLog(@"No available account!");
+            }
+        }
+        else
+        {
+            NSLog(@"Not granted!");
+        }
+    }];
 }
 
 @end

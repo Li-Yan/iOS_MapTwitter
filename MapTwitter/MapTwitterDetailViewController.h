@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 
 #import "Tweet.h"
+#import "TwitterDeveloper.h"
 #import "MapTwitterViewController.h"
 
 @interface MapTwitterDetailViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) Tweet *tweet;
+@property (nonatomic, strong) TwitterDeveloper *developer;
 
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (strong, nonatomic) IBOutlet UITextField *textField;
