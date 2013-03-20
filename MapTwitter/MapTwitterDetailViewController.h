@@ -9,14 +9,16 @@
 #import <UIKit/UIKit.h>
 
 #import "Tweet.h"
+#import "MapTwitterViewController.h"
 
-@interface MapTwitterDetailViewController : UIViewController <UITextFieldDelegate>
+@interface MapTwitterDetailViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) Tweet *tweet;
 
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 @property (strong, nonatomic) IBOutlet UITextView *textView;
+@property (strong, nonatomic) IBOutlet UIButton *retweetButton;
 
 - (MapTwitterDetailViewController *)initWithTweet:(Tweet *)init_tweet;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;

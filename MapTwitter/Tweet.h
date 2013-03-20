@@ -23,6 +23,10 @@
 @property CLLocationCoordinate2D coordinate;
 @property BOOL pined;
 
+//Favorite & Retweet
+@property BOOL favorited;
+@property BOOL retweeted;
+
 - (Tweet *) initWithJSONDic:(NSDictionary *)tweetDic;
 
 @end

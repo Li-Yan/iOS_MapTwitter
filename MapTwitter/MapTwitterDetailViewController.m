@@ -105,24 +105,26 @@
     currentHeight = currentHeight + verticalBlank + textFieldHeight;
     
     //buttons
-    double buttonWidth = screenSize.width / 7;
-    double buttonHeight = 37;
-    UIButton *returnButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [returnButton setBackgroundImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
-    [returnButton setFrame:CGRectMake(3 * sideBlank, currentHeight + (screenSize.height - currentHeight - buttonHeight - verticalBlank) / 2 - up_downBlank, buttonWidth, buttonHeight)];
-    [returnButton addTarget:self action:@selector(returnToMap:) forControlEvents:UIControlEventTouchUpInside];
-    UIButton *postButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [postButton setBackgroundImage:[UIImage imageNamed:@"reply.png"] forState:UIControlStateNormal];
-    [postButton setFrame:CGRectMake(screenSize.width - 3 * sideBlank - buttonWidth, currentHeight + (screenSize.height - currentHeight - buttonHeight - verticalBlank) / 2 - up_downBlank, buttonWidth, buttonHeight)];
-    [postButton addTarget:self action:@selector(reply:) forControlEvents:UIControlEventTouchUpInside];
+    double buttonWidth = 27;
+    double buttonHeight = 27;
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
+    [backButton setFrame:CGRectMake(3 * sideBlank, currentHeight + (screenSize.height - currentHeight - buttonHeight - verticalBlank) / 2 - up_downBlank, buttonWidth, buttonHeight)];
+    [backButton addTarget:self action:@selector(returnToMap:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.retweetButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    if (!tweet.retweeted) [self.retweetButton setBackgroundImage:[UIImage imageNamed:@"retweet.png"] forState:UIControlStateNormal];
+    else [self.retweetButton setBackgroundImage:[UIImage imageNamed:@"retweeted.png"] forState:UIControlStateNormal];
+    [self.retweetButton setFrame:CGRectMake(screenSize.width - 3 * sideBlank - buttonWidth, currentHeight + (screenSize.height - currentHeight - buttonHeight - verticalBlank) / 2 - up_downBlank, buttonWidth, buttonHeight)];
+    [self.retweetButton addTarget:self action:@selector(retweet:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:titleLabel];
     [self.view addSubview:imageView];
     [self.view addSubview:nameLabel];
     [self.view addSubview:self.textView];
     [self.view addSubview:self.textField];
-    [self.view addSubview:returnButton];
-    [self.view addSubview:postButton];
+    [self.view addSubview:backButton];
+    [self.view addSubview:self.retweetButton];
 }
 
 - (void)didReceiveMemoryWarning
@@ -136,9 +138,25 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)reply:(id)sender
+- (void)retweet:(id)sender
 {
-    
+    NSString *messageString = [[NSString alloc] init];
+    if (!tweet.retweeted)
+    {
+        messageString = @"Retweet Succeeds!";
+        [MapTwitterViewController setRetweeted:self.tweet];
+        [self.retweetButton setBackgroundImage:[UIImage imageNamed:@"retweeted.png"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        messageString = @"Already retweeted!";
+    }
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Retweet Message"
+                                                        message:messageString
+                                                       delegate:self
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles:nil];
+    [alertView show];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

@@ -18,6 +18,8 @@
 @synthesize title;
 @synthesize coordinate;
 @synthesize pined;
+@synthesize favorited;
+@synthesize retweeted;
 
 - (Tweet *)initWithJSONDic:(NSDictionary *)tweetDic {
     self = [super init];
@@ -40,6 +42,9 @@
     tweetCoordinate.longitude = [[array objectAtIndex:1] doubleValue];
     [self setCoordinate:tweetCoordinate];
     [self setPined:false];
+    
+    [self setFavorited:false];
+    [self setRetweeted:false];
     
     return self;
 }

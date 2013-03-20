@@ -8,13 +8,14 @@
 
 #import "MapTwitterViewController.h"
 
+static NSMutableDictionary *tweets;
+
 @interface MapTwitterViewController ()
 
 @end
 
 @implementation MapTwitterViewController
 
-@synthesize tweets;
 @synthesize myCoordinate;
 @synthesize tagArray;
 
@@ -25,7 +26,7 @@
     
     [self initMapView];
     
-    self.tweets = [[NSMutableDictionary alloc] init];
+    tweets = [[NSMutableDictionary alloc] init];
     self.tagArray = [[NSMutableArray alloc] init];
 }
 
@@ -46,11 +47,17 @@
 
 - (void)addTweets:(Tweet *)tweet
 {
-    if ([self.tweets objectForKey:tweet.id_str] == nil)
+    if ([tweets objectForKey:tweet.id_str] == nil)
     {
-        [self.tweets setObject:tweet forKey:tweet.id_str];
+        [tweets setObject:tweet forKey:tweet.id_str];
         [self.tagArray addObject:tweet.id_str];
     }
+}
+
++ (void)setRetweeted:(Tweet *)tweet
+{
+    tweet.retweeted = true;
+    [tweets setObject:tweet forKey:tweet.id_str];
 }
 
 - (void)initMapView
@@ -85,7 +92,7 @@
 
 - (void)PlaceTweetsPin
 {
-    NSDictionary *dic = [[NSDictionary alloc] initWithDictionary:self.tweets];
+    NSDictionary *dic = [[NSDictionary alloc] initWithDictionary:tweets];
     NSArray *keys = [dic allKeys];
     for (NSString *key in keys) {
         Tweet *tweet = [dic objectForKey:key];
@@ -93,7 +100,7 @@
         {
             [self.mapView addAnnotation:tweet];
             tweet.pined = true;
-            [self.tweets setObject:tweet forKey:tweet.id_str];
+            [tweets setObject:tweet forKey:tweet.id_str];
         }
     }
 }
@@ -190,7 +197,7 @@
 - (void)tweetDetail:(id)sender
 {
     NSString *key = [self.tagArray objectAtIndex:((UIButton *)sender).tag];
-    Tweet *tweet = [self.tweets objectForKey:key];
+    Tweet *tweet = [tweets objectForKey:key];
     MapTwitterDetailViewController *detailViewController = [[MapTwitterDetailViewController alloc] initWithTweet:tweet];
     [self presentViewController:detailViewController animated:YES completion:nil];
 }

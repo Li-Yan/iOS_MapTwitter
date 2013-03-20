@@ -63,9 +63,4 @@
     return [self tweetsSearch:URLString GeoLocation:geocode Range:1];
 }
 
-- (void)manageTweets:(NSData *)tweetsData
-{
-    
-}
-
 @end
