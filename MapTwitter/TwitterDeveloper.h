@@ -12,6 +12,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import <unistd.h>
 
+#import "MapTwitterViewController.h"
+
 @interface TwitterDeveloper : NSObject
 
 @property (nonatomic, strong) NSString *consumer_key;
@@ -22,5 +24,6 @@
 - (TwitterDeveloper *) initAsDeveloper;
 - (NSData *) tweetsSearch: (NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode;
 - (NSData *) tweetsSearch: (NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode Range:(double) range;
+- (void)manageTweets:(NSData *)tweetsData;
 
 @end

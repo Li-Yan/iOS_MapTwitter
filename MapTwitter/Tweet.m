@@ -17,13 +17,13 @@
 @synthesize image;
 @synthesize title;
 @synthesize coordinate;
+@synthesize pined;
 
 - (Tweet *)initWithJSONDic:(NSDictionary *)tweetDic {
     self = [super init];
     
     NSDictionary *subDic = nil;
     [self setId_str:[[NSString alloc] initWithFormat:@"%@", [tweetDic objectForKey:@"id_str"]]];
-    NSLog(@"%@", self.id_str);
     subDic = [tweetDic objectForKey:@"user"];
     [self setName:[[NSString alloc] initWithFormat:@"%@", [subDic objectForKey:@"name"]]];
     [self setImageURL:[[NSString alloc] initWithFormat:@"%@", [subDic objectForKey:@"profile_image_url"]]];
@@ -39,6 +39,7 @@
     tweetCoordinate.latitude = [[array objectAtIndex:0] doubleValue];
     tweetCoordinate.longitude = [[array objectAtIndex:1] doubleValue];
     [self setCoordinate:tweetCoordinate];
+    [self setPined:false];
     
     return self;
 }

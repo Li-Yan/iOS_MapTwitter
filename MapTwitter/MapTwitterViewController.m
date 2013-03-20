@@ -15,6 +15,7 @@
 @implementation MapTwitterViewController
 
 @synthesize tweets;
+@synthesize myCoordinate;
 
 - (void)viewDidLoad
 {
@@ -23,10 +24,16 @@
     
     [self initMapView];
     
-    tweets = [[NSMutableArray alloc] init];
+    self.tweets = [[NSMutableDictionary alloc] init];
+}
+
+-(void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
+{
     [self fetchTweets];
+    dispatch_async(dispatch_get_main_queue(), ^{[self PlaceTweetsPin];});
     
-    [self PlaceTweetsPin];
+    NSThread *updateThread = [[NSThread alloc] initWithTarget:self selector:@selector(updateTweets) object:nil];
+    [updateThread start];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,8 +42,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)addTweets:(Tweet *)tweet
+{
+    if ([self.tweets objectForKey:tweet.id_str] == nil)
+    {
+        [self.tweets setObject:tweet forKey:tweet.id_str];
+    }
+}
+
 - (void)initMapView
 {
+    self.mapView.delegate = self;
+    
     CLLocationManager *locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.distanceFilter = kCLDistanceFilterNone;
@@ -46,7 +63,7 @@
     CLLocationCoordinate2D coordinate2D = locationManager.location.coordinate;
     coordinate2D.latitude = New_York_Latitude;
     coordinate2D.longitude = New_York_Longitude;
-    myCoordinate = coordinate2D;
+    self.myCoordinate = coordinate2D;
     
     MKCoordinateSpan mySpan;
     mySpan.latitudeDelta = 0.027;
@@ -55,7 +72,7 @@
     MKCoordinateRegion myRegion;
     myRegion.center = coordinate2D;
     myRegion.span = mySpan;
-    [self.mapView setRegion:myRegion];
+    [self.mapView setRegion:myRegion animated:true];
     
     MKCircle *circle = [MKCircle circleWithCenterCoordinate:coordinate2D radius:Search_Range * Meters_Per_Mile];
     [self.mapView addOverlay:circle];
@@ -65,8 +82,16 @@
 
 - (void)PlaceTweetsPin
 {
-    for (Tweet *tweet in tweets) {
-        [self.mapView addAnnotation:tweet];
+    NSDictionary *dic = [[NSDictionary alloc] initWithDictionary:self.tweets];
+    NSArray *keys = [dic allKeys];
+    for (NSString *key in keys) {
+        Tweet *tweet = [dic objectForKey:key];
+        if (tweet.pined == false)
+        {
+            [self.mapView addAnnotation:tweet];
+            tweet.pined = true;
+            [self.tweets setObject:tweet forKey:tweet.id_str];
+        }
     }
 }
 
@@ -74,7 +99,7 @@
 {
     TwitterDeveloper *twitter_developer = [[TwitterDeveloper alloc] initAsDeveloper];
     NSString *tweetsSearchURL = @"https://api.twitter.com/1.1/search/tweets.json?";
-    NSData *tweetsData = [twitter_developer tweetsSearch:tweetsSearchURL GeoLocation:myCoordinate Range:Search_Range];
+    NSData *tweetsData = [twitter_developer tweetsSearch:tweetsSearchURL GeoLocation:self.myCoordinate Range:Search_Range];
     NSError *error = nil;
     NSDictionary *tweetsDic = [NSJSONSerialization JSONObjectWithData:tweetsData options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&error];
     tweetsDic = [tweetsDic objectForKey:@"statuses"];
@@ -84,9 +109,23 @@
             //Tweets that have "geo"
         {
             Tweet *tweet = [[Tweet alloc] initWithJSONDic:subDic];
-            [tweets addObject:tweet];
+            [self addTweets:tweet];
         }
     }
+}
+
+- (void)updateTweets
+{
+    while (true) {
+        [self fetchTweets];
+        dispatch_async(dispatch_get_main_queue(), ^{[self PlaceTweetsPin];});
+        sleep(5);
+    }
+}
+
+-(void) reloadMap
+{
+    [self.mapView setRegion:self.mapView.region animated:TRUE];
 }
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay

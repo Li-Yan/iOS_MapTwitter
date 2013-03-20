@@ -24,7 +24,7 @@
     return self;
 }
 
-- (NSData *) tweetsSearch:(NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode Range:(double)range {
+- (NSData *)tweetsSearch:(NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode Range:(double)range {
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     __block NSData *tweetsData = nil;
@@ -59,8 +59,13 @@
     return tweetsData;
 }
 
-- (NSData *) tweetsSearch: (NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode {
+- (NSData *)tweetsSearch: (NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode {
     return [self tweetsSearch:URLString GeoLocation:geocode Range:1];
+}
+
+- (void)manageTweets:(NSData *)tweetsData
+{
+    
 }
 
 @end

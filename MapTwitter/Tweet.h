@@ -21,6 +21,7 @@
 //Map
 @property (nonatomic, strong) NSString *title;
 @property CLLocationCoordinate2D coordinate;
+@property BOOL pined;
 
 - (Tweet *) initWithJSONDic:(NSDictionary *)tweetDic;
 
