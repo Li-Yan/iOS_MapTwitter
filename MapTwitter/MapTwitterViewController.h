@@ -25,6 +25,8 @@ static const double Search_Range = 1;                   //1 mile search range fo
 @property CLLocationCoordinate2D myCoordinate;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
+@property (nonatomic, strong) TwitterDeveloper *developer;
+
 //for button tag
 @property NSMutableArray *tagArray;
 
@@ -35,6 +37,7 @@ static const double Search_Range = 1;                   //1 mile search range fo
 - (void)initMapView;
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay;
 - (void)fetchTweets;
+- (void)checkFavorite;
 - (void)updateTweets;
 
 

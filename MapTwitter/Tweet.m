@@ -43,8 +43,13 @@
     [self setCoordinate:tweetCoordinate];
     [self setPined:false];
     
-    [self setFavorited:false];
-    [self setRetweeted:false];
+    [self setFavorited:[[[NSString alloc] initWithFormat:@"%@", [tweetDic objectForKey:@"favorited"]] boolValue]];
+    //NSLog(@"%@", [tweetDic objectForKey:@"favorited"]);
+    if (self.favorited)
+    {
+        NSLog(@"%@", self.name);
+    }
+    [self setRetweeted:[[[NSString alloc] initWithFormat:@"%@", [tweetDic objectForKey:@"retweeted"]] boolValue]];
     
     return self;
 }

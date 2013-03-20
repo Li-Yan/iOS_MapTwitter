@@ -12,8 +12,6 @@
 #import <CoreLocation/CoreLocation.h>
 #import <unistd.h>
 
-//#import "MapTwitterViewController.h"
-
 @interface TwitterDeveloper : NSObject
 
 @property (nonatomic, strong) NSString *consumer_key;
@@ -27,5 +25,7 @@
 
 - (void)retweet:(NSString *)id_str;
 - (void)favorite:(NSString *)id_str Is_Create:(BOOL)is_create;
+- (NSData *)getFavorite;
+- (NSData *)getTimeline;
 
 @end

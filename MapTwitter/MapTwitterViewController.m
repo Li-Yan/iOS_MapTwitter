@@ -17,6 +17,7 @@ static NSMutableDictionary *tweets;
 @implementation MapTwitterViewController
 
 @synthesize myCoordinate;
+@synthesize developer;
 @synthesize tagArray;
 
 - (void)viewDidLoad
@@ -28,6 +29,8 @@ static NSMutableDictionary *tweets;
     
     tweets = [[NSMutableDictionary alloc] init];
     self.tagArray = [[NSMutableArray alloc] init];
+    
+    self.developer = [[TwitterDeveloper alloc] initAsDeveloper];
 }
 
 -(void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
@@ -113,13 +116,13 @@ static NSMutableDictionary *tweets;
 
 - (void)fetchTweets
 {
-    TwitterDeveloper *twitter_developer = [[TwitterDeveloper alloc] initAsDeveloper];
     NSString *tweetsSearchURL = @"https://api.twitter.com/1.1/search/tweets.json?";
-    NSData *tweetsData = [twitter_developer tweetsSearch:tweetsSearchURL GeoLocation:self.myCoordinate Range:Search_Range];
+    NSData *tweetsData = [developer tweetsSearch:tweetsSearchURL GeoLocation:self.myCoordinate Range:Search_Range];
     NSError *error = nil;
     NSDictionary *tweetsDic = [NSJSONSerialization JSONObjectWithData:tweetsData options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&error];
     tweetsDic = [tweetsDic objectForKey:@"statuses"];
-    for (NSDictionary *subDic in tweetsDic) {
+    for (NSDictionary *subDic in tweetsDic)
+    {
         NSString *geoString = [[NSString alloc] initWithFormat:@"%@", [subDic objectForKey:@"geo"]];
         if (![geoString isEqualToString:@"<null>"])
             //Tweets that have "geo"
@@ -130,12 +133,33 @@ static NSMutableDictionary *tweets;
     }
 }
 
+- (void)checkFavorite
+{
+    NSData * favoriteData = [self.developer getFavorite];
+    NSError *error = nil;
+    NSDictionary *favoriteDic = [NSJSONSerialization JSONObjectWithData:favoriteData options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&error];
+    if ([favoriteDic objectForKey:@"errors"] != nil)
+    {
+        return;
+    }
+    for (NSDictionary *subDic in favoriteDic)
+    {
+        NSString *id_str = [[NSString alloc] initWithFormat:@"%@", [subDic objectForKey:@"id_str"]];
+        Tweet *tweet = [tweets objectForKey:id_str];
+        if (tweet != nil)
+        {
+            [MapTwitterViewController setFavoriteState:tweet State:true];
+        }
+    }
+}
+
 - (void)updateTweets
 {
     while (true) {
         [self fetchTweets];
+        [self checkFavorite];
         dispatch_async(dispatch_get_main_queue(), ^{[self PlaceTweetsPin];});
-        sleep(5);
+        sleep(60);
     }
 }
 

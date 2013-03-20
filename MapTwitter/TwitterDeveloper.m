@@ -52,6 +52,7 @@
                 [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
                  {
                      tweetsData = responseData;
+                     //NSLog(@"%@", [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding]);
                  }];
             }
             else
@@ -137,6 +138,50 @@
             NSLog(@"Not granted!");
         }
     }];
+}
+
+- (NSData *)getFavorite
+{
+    ACAccountStore *account = [[ACAccountStore alloc] init];
+    ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    __block NSData *favoriteData = nil;
+    [account requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error)
+     {
+         if (granted)
+         {
+             NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
+             if (arrayOfAccounts.count > 0)
+             {
+                 ACAccount *twitter_account = [arrayOfAccounts objectAtIndex:0];
+                 ACAccountCredential *twitter_account_credential = [[ACAccountCredential alloc] initWithOAuthToken:self.access_token tokenSecret:self.access_token_secret];
+                 [twitter_account setCredential:twitter_account_credential];
+                 
+                 NSString *URLString = nil;
+                 URLString = [[NSString alloc] initWithFormat:@"https://api.twitter.com/1.1/favorites/list.json"];
+                 NSURL *requestURL = [NSURL URLWithString:URLString];
+                 NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+                 SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:requestURL parameters:parameters];
+                 [request setAccount:twitter_account];
+                 [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
+                 {
+                     favoriteData = responseData;
+                 }];
+             }
+             else
+             {
+                 NSLog(@"No available account!");
+             }
+         }
+         else
+         {
+             NSLog(@"Not granted!");
+         }
+     }];
+    while (favoriteData == nil)
+    {
+        sleep(1);
+    }
+    return favoriteData;
 }
 
 @end

@@ -95,6 +95,7 @@
     [imageView setFrame:CGRectMake(sideBlank, up_downBlank + titleLabelHeight +verticalBlank + ((currentHeight - up_downBlank - titleLabelHeight - verticalBlank - imageHeight) / 2), imageWidth, imageHeight)];
     
     //text field
+    /*
     double textFieldWidth = screenSize.width - 2 * sideBlank;
     double textFieldHeight = screenSize.height / 2.3;
     self.textField = [[UITextField alloc] initWithFrame:CGRectMake(sideBlank, currentHeight + verticalBlank, textFieldWidth, textFieldHeight)];
@@ -105,6 +106,7 @@
     [self.textField setBorderStyle:UITextBorderStyleRoundedRect];
     self.textField.delegate = self;
     currentHeight = currentHeight + verticalBlank + textFieldHeight;
+    */
     
     //buttons
     double buttonWidth = 27;
@@ -130,7 +132,6 @@
     [self.view addSubview:imageView];
     [self.view addSubview:nameLabel];
     [self.view addSubview:self.textView];
-    [self.view addSubview:self.textField];
     [self.view addSubview:backButton];
     [self.view addSubview:self.retweetButton];
     [self.view addSubview:self.favoriteButton];
@@ -185,7 +186,7 @@
         [MapTwitterViewController setFavoriteState:tweet State:false];
         [self.favoriteButton setBackgroundImage:[UIImage imageNamed:@"favorite.png"] forState:UIControlStateNormal];
     }
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Retweet Message" message:messageString delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Favorite Message" message:messageString delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
     [alertView show];
 }
 
