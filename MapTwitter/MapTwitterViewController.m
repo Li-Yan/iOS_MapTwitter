@@ -54,9 +54,9 @@ static NSMutableDictionary *tweets;
     }
 }
 
-+ (void)setRetweeted:(Tweet *)tweet
++ (void)setRetweetState:(Tweet *)tweet State:(BOOL)state
 {
-    tweet.retweeted = true;
+    tweet.retweeted = state;
     [tweets setObject:tweet forKey:tweet.id_str];
 }
 

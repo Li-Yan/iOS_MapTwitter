@@ -33,23 +33,29 @@
         if (granted)
         {
             NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
-            ACAccount *twitter_account = [arrayOfAccounts objectAtIndex:0];
-            ACAccountCredential *twitter_account_credential = [[ACAccountCredential alloc] initWithOAuthToken:self.access_token tokenSecret:self.access_token_secret];
-            [twitter_account setCredential:twitter_account_credential];
-            
-            NSURL *requestURL = [NSURL URLWithString:URLString];
-            NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-            NSString *geoString = [[NSString alloc] initWithFormat:@"%f,%f,%fmi", geocode.latitude, geocode.longitude, range];
-            [parameters setObject:geoString forKey:@"geocode"];
-            [parameters setObject:@"100" forKey:@"count"];
-            [parameters setObject:@"apple" forKey:@"q"];
-            SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:requestURL parameters:parameters];
-            [request setAccount:twitter_account];
-            [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                tweetsData = responseData;
-                //NSString *tweetsString = [[NSString alloc] initWithData:tweetsData encoding:NSASCIIStringEncoding];
-                //NSLog(@"%@", tweetsString);
-            }];
+            if (arrayOfAccounts.count > 0)
+            {
+                ACAccount *twitter_account = [arrayOfAccounts objectAtIndex:0];
+                ACAccountCredential *twitter_account_credential = [[ACAccountCredential alloc] initWithOAuthToken:self.access_token tokenSecret:self.access_token_secret];
+                [twitter_account setCredential:twitter_account_credential];
+                
+                NSURL *requestURL = [NSURL URLWithString:URLString];
+                NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+                NSString *geoString = [[NSString alloc] initWithFormat:@"%f,%f,%fmi", geocode.latitude, geocode.longitude, range];
+                [parameters setObject:geoString forKey:@"geocode"];
+                [parameters setObject:@"100" forKey:@"count"];
+                [parameters setObject:@"apple" forKey:@"q"];
+                SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:requestURL parameters:parameters];
+                [request setAccount:twitter_account];
+                [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
+                 {
+                     tweetsData = responseData;
+                 }];
+            }
+            else
+            {
+                NSLog(@"No available account!");
+            }
         }
     }copy]];
     while (tweetsData == nil)
@@ -61,6 +67,31 @@
 
 - (NSData *)tweetsSearch: (NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode {
     return [self tweetsSearch:URLString GeoLocation:geocode Range:1];
+}
+
+- (void)retweet:(NSString *)id_str
+{
+    ACAccountStore *account = [[ACAccountStore alloc] init];
+    ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    [account requestAccessToAccountsWithType:accountType options:nil completion:[^(BOOL granted, NSError *error)
+    {
+        if (granted)
+        {
+            NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
+            ACAccount *twitter_account = [arrayOfAccounts objectAtIndex:0];
+            ACAccountCredential *twitter_account_credential = [[ACAccountCredential alloc] initWithOAuthToken:self.access_token tokenSecret:self.access_token_secret];
+            [twitter_account setCredential:twitter_account_credential];
+            
+            NSString *URLString = [[NSString alloc] initWithFormat:@"https://api.twitter.com/1.1/statuses/retweet/:%@.json", id_str];
+            NSURL *requestURL = [NSURL URLWithString:URLString];
+            NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+            SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodPOST URL:requestURL parameters:parameters];
+            [request setAccount:twitter_account];
+            [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
+            {
+            }];
+        }
+    }copy]];
 }
 
 @end

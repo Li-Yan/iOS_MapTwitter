@@ -144,18 +144,16 @@
     if (!tweet.retweeted)
     {
         messageString = @"Retweet Succeeds!";
-        [MapTwitterViewController setRetweeted:self.tweet];
+        [MapTwitterViewController setRetweetState:tweet State:true];
         [self.retweetButton setBackgroundImage:[UIImage imageNamed:@"retweeted.png"] forState:UIControlStateNormal];
     }
     else
     {
-        messageString = @"Already retweeted!";
+        messageString = @"Destroy Succeeds!";
+        [MapTwitterViewController setRetweetState:tweet State:false];
+        [self.retweetButton setBackgroundImage:[UIImage imageNamed:@"retweet.png"] forState:UIControlStateNormal];
     }
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Retweet Message"
-                                                        message:messageString
-                                                       delegate:self
-                                              cancelButtonTitle:@"Okay"
-                                              otherButtonTitles:nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Retweet Message" message:messageString delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
     [alertView show];
 }
 

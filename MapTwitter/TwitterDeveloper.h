@@ -22,7 +22,9 @@
 @property (nonatomic, strong) NSString *access_token_secret;
 
 - (TwitterDeveloper *) initAsDeveloper;
-- (NSData *) tweetsSearch: (NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode;
-- (NSData *) tweetsSearch: (NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode Range:(double) range;
+- (NSData *) tweetsSearch:(NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode;
+- (NSData *) tweetsSearch:(NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode Range:(double) range;
+
+- (void) retweet:(NSString *)id_str;
 
 @end
