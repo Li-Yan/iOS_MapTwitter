@@ -30,6 +30,7 @@ static const double Search_Range = 1;                   //1 mile search range fo
 
 - (void)addTweets:(Tweet *)tweet;
 + (void)setRetweetState:(Tweet *)tweet State:(BOOL)state;
++ (void)setFavoriteState:(Tweet *)tweet State:(BOOL)state;
 
 - (void)initMapView;
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay;

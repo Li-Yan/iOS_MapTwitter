@@ -102,7 +102,7 @@
     }];
 }
 
-- (void)favoriteCreate:(NSString *)id_str
+- (void)favorite:(NSString *)id_str Is_Create:(BOOL)is_create
 {
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
@@ -117,7 +117,9 @@
                 ACAccountCredential *twitter_account_credential = [[ACAccountCredential alloc] initWithOAuthToken:self.access_token tokenSecret:self.access_token_secret];
                 [twitter_account setCredential:twitter_account_credential];
                 
-                NSString *URLString = [[NSString alloc] initWithFormat:@"https://api.twitter.com/1.1/favorites/create.json"];
+                NSString *URLString = nil;
+                if (is_create) URLString = [[NSString alloc] initWithFormat:@"https://api.twitter.com/1.1/favorites/create.json"];
+                else URLString = [[NSString alloc] initWithFormat:@"https://api.twitter.com/1.1/favorites/destroy.json"];
                 NSURL *requestURL = [NSURL URLWithString:URLString];
                 NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
                 [parameters setObject:id_str forKey:@"id"];

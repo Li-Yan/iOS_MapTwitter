@@ -26,6 +26,6 @@
 - (NSData *) tweetsSearch:(NSString *)URLString GeoLocation:(CLLocationCoordinate2D)geocode Range:(double) range;
 
 - (void)retweet:(NSString *)id_str;
-- (void)favoriteCreate:(NSString *)id_str;
+- (void)favorite:(NSString *)id_str Is_Create:(BOOL)is_create;
 
 @end

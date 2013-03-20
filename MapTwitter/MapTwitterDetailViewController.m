@@ -111,14 +111,20 @@
     double buttonHeight = 27;
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
-    [backButton setFrame:CGRectMake(3 * sideBlank, currentHeight + (screenSize.height - currentHeight - buttonHeight - verticalBlank) / 2 - up_downBlank, buttonWidth, buttonHeight)];
+    [backButton setFrame:CGRectMake(3 * sideBlank, currentHeight + (screenSize.height - currentHeight - buttonHeight - verticalBlank) / 2 - 2 * up_downBlank, buttonWidth, buttonHeight)];
     [backButton addTarget:self action:@selector(returnToMap:) forControlEvents:UIControlEventTouchUpInside];
     
     self.retweetButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     if (!tweet.retweeted) [self.retweetButton setBackgroundImage:[UIImage imageNamed:@"retweet.png"] forState:UIControlStateNormal];
     else [self.retweetButton setBackgroundImage:[UIImage imageNamed:@"retweeted.png"] forState:UIControlStateNormal];
-    [self.retweetButton setFrame:CGRectMake(screenSize.width - 3 * sideBlank - buttonWidth, currentHeight + (screenSize.height - currentHeight - buttonHeight - verticalBlank) / 2 - up_downBlank, buttonWidth, buttonHeight)];
+    [self.retweetButton setFrame:CGRectMake(screenSize.width - 3 * sideBlank - buttonWidth, currentHeight + (screenSize.height - currentHeight - buttonHeight - verticalBlank) / 2 - 2 * up_downBlank, buttonWidth, buttonHeight)];
     [self.retweetButton addTarget:self action:@selector(retweet:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.favoriteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    if (!tweet.favorited) [self.favoriteButton setBackgroundImage:[UIImage imageNamed:@"favorite.png"] forState:UIControlStateNormal];
+    else [self.favoriteButton setBackgroundImage:[UIImage imageNamed:@"favorited.png"] forState:UIControlStateNormal];
+    [self.favoriteButton setFrame:CGRectMake((screenSize.width - 2 * buttonWidth) / 2, currentHeight + (screenSize.height - currentHeight - 2 * buttonHeight - verticalBlank) / 2 - 2 * up_downBlank, 2 * buttonWidth, 2 * buttonHeight)];
+    [self.favoriteButton addTarget:self action:@selector(favorite:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:titleLabel];
     [self.view addSubview:imageView];
@@ -127,6 +133,7 @@
     [self.view addSubview:self.textField];
     [self.view addSubview:backButton];
     [self.view addSubview:self.retweetButton];
+    [self.view addSubview:self.favoriteButton];
 }
 
 - (void)didReceiveMemoryWarning
@@ -145,6 +152,7 @@
     NSString *messageString = [[NSString alloc] init];
     if (!tweet.retweeted)
     {
+        tweet.retweeted = true;
         [developer retweet:tweet.id_str];
         messageString = @"Retweet Succeeds!";
         [MapTwitterViewController setRetweetState:tweet State:true];
@@ -153,6 +161,29 @@
     else
     {
         messageString = @"Already Retweeted!";
+    }
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Retweet Message" message:messageString delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+    [alertView show];
+}
+
+- (void)favorite:(id)sender
+{
+    NSString *messageString = [[NSString alloc] init];
+    if (!tweet.favorited)
+    {
+        [developer favorite:tweet.id_str Is_Create:true];
+        tweet.favorited = true;
+        messageString = @"Add to Favority!";
+        [MapTwitterViewController setFavoriteState:tweet State:true];
+        [self.favoriteButton setBackgroundImage:[UIImage imageNamed:@"favorited.png"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [developer favorite:tweet.id_str Is_Create:false];
+        tweet.favorited = false;
+        messageString = @"Remove from Favority!";
+        [MapTwitterViewController setFavoriteState:tweet State:false];
+        [self.favoriteButton setBackgroundImage:[UIImage imageNamed:@"favorite.png"] forState:UIControlStateNormal];
     }
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Retweet Message" message:messageString delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
     [alertView show];

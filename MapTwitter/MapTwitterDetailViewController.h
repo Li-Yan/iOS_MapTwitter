@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 @property (strong, nonatomic) IBOutlet UITextView *textView;
 @property (strong, nonatomic) IBOutlet UIButton *retweetButton;
+@property (strong, nonatomic) IBOutlet UIButton *favoriteButton;
 
 - (MapTwitterDetailViewController *)initWithTweet:(Tweet *)init_tweet;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;

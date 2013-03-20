@@ -60,6 +60,12 @@ static NSMutableDictionary *tweets;
     [tweets setObject:tweet forKey:tweet.id_str];
 }
 
++ (void)setFavoriteState:(Tweet *)tweet State:(BOOL)state
+{
+    tweet.favorited = state;
+    [tweets setObject:tweet forKey:tweet.id_str];
+}
+
 - (void)initMapView
 {
     self.mapView.delegate = self;
