@@ -38,6 +38,7 @@ static const double Search_Range = 1;                   //1 mile search range fo
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay;
 - (void)fetchTweets;
 - (void)checkFavorite;
+- (void)checkTweetsNum;
 - (void)updateTweets;
 
 

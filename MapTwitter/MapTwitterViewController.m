@@ -138,8 +138,10 @@ static NSMutableDictionary *tweets;
     NSData * favoriteData = [self.developer getFavorite];
     NSError *error = nil;
     NSDictionary *favoriteDic = [NSJSONSerialization JSONObjectWithData:favoriteData options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&error];
-    if ([favoriteDic objectForKey:@"errors"] != nil)
+    NSString *errorString = [[NSString alloc] initWithFormat:@"%@", favoriteDic];
+    if ([errorString rangeOfString:@"error" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
+        NSLog(@"%d", [errorString rangeOfString:@"error" options:NSCaseInsensitiveSearch].location);
         return;
     }
     for (NSDictionary *subDic in favoriteDic)
@@ -153,10 +155,21 @@ static NSMutableDictionary *tweets;
     }
 }
 
+- (void)checkTweetsNum
+{
+    NSArray *keys = [tweets allKeys];
+    if (keys.count > 100) {
+        for (int i = 0; i < 10; i++) {
+            [tweets removeObjectForKey:[keys objectAtIndex:i]];
+        }
+    }
+}
+
 - (void)updateTweets
 {
     while (true) {
         [self fetchTweets];
+        [self checkTweetsNum];
         [self checkFavorite];
         dispatch_async(dispatch_get_main_queue(), ^{[self PlaceTweetsPin];});
         sleep(60);
