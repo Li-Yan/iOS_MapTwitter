@@ -13,6 +13,7 @@
 @synthesize id_str;
 @synthesize name;
 @synthesize text;
+@synthesize timeStamp;
 @synthesize imageURL;
 @synthesize image;
 @synthesize title;
@@ -26,6 +27,7 @@
     
     NSDictionary *subDic = nil;
     [self setId_str:[[NSString alloc] initWithFormat:@"%@", [tweetDic objectForKey:@"id_str"]]];
+    [self setTimeStamp:[tweetDic objectForKey:@"created_at"]];
     subDic = [tweetDic objectForKey:@"user"];
     [self setName:[[NSString alloc] initWithFormat:@"%@", [subDic objectForKey:@"name"]]];
     [self setImageURL:[[NSString alloc] initWithFormat:@"%@", [subDic objectForKey:@"profile_image_url"]]];

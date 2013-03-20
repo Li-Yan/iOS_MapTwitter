@@ -26,6 +26,5 @@
 - (void)retweet:(NSString *)id_str;
 - (void)favorite:(NSString *)id_str Is_Create:(BOOL)is_create;
 - (NSData *)getFavorite;
-- (NSData *)getTimeline;
 
 @end

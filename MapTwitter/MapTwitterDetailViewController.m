@@ -91,6 +91,16 @@
     [self.textView setScrollEnabled:YES];
     currentHeight = currentHeight + 1 + textViewHeight;
     
+    double timeLabelWidth = screenSize.width - 2 * sideBlank - horizontalBlank;
+    double timeLabelHeight = screenSize.height / 25;
+    UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(sideBlank, currentHeight + verticalBlank, timeLabelWidth, timeLabelHeight)];
+    [timeLabel setText:tweet.timeStamp];
+    [timeLabel setFont:[UIFont fontWithName:@"Arial" size:(13.0f)]];
+    [timeLabel setTextAlignment:NSTextAlignmentCenter];
+    [timeLabel setTextColor:[UIColor blackColor]];
+    [timeLabel setBackgroundColor:[UIColor clearColor]];
+    currentHeight = currentHeight + verticalBlank + timeLabelHeight;
+    
     //move image
     [imageView setFrame:CGRectMake(sideBlank, up_downBlank + titleLabelHeight +verticalBlank + ((currentHeight - up_downBlank - titleLabelHeight - verticalBlank - imageHeight) / 2), imageWidth, imageHeight)];
     
@@ -132,6 +142,7 @@
     [self.view addSubview:imageView];
     [self.view addSubview:nameLabel];
     [self.view addSubview:self.textView];
+    [self.view addSubview:timeLabel];
     [self.view addSubview:backButton];
     [self.view addSubview:self.retweetButton];
     [self.view addSubview:self.favoriteButton];
