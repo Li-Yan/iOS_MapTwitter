@@ -13,7 +13,7 @@
 
 #import "TwitterDeveloper.h"
 #import "Tweet.h"
-
+#import "MapTwitterDetailViewController.h"
 
 static const double New_York_Latitude = 40.809520;
 static const double New_York_Longitude = -73.959319;
@@ -25,6 +25,9 @@ static const double Search_Range = 1;                   //1 mile search range fo
 @property CLLocationCoordinate2D myCoordinate;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) NSMutableDictionary *tweets;
+
+//for button tag
+@property NSMutableArray *tagArray;
 
 - (void)addTweets:(Tweet *) tweet;
 

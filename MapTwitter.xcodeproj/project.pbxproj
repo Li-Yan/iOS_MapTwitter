@@ -11,6 +11,7 @@
 		B090C4A416F1911C00CBC9E5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B090C4A316F1911C00CBC9E5 /* Accounts.framework */; };
 		B090C4A716F19FE100CBC9E5 /* TwitterDeveloper.m in Sources */ = {isa = PBXBuildFile; fileRef = B090C4A616F19FE100CBC9E5 /* TwitterDeveloper.m */; };
 		B09574C316E8059A00EFDBB2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B09574C216E8059A00EFDBB2 /* CoreLocation.framework */; };
+		B097B69F16F97C96008C7FBD /* MapTwitterDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B097B69E16F97C96008C7FBD /* MapTwitterDetailViewController.m */; };
 		B0A6687A16F51BDA009C9875 /* MapTwitter.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A6687916F51BDA009C9875 /* MapTwitter.png */; };
 		B0AB6FBA16E7F17100EB71F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AB6FB916E7F17100EB71F5 /* UIKit.framework */; };
 		B0AB6FBC16E7F17100EB71F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AB6FBB16E7F17100EB71F5 /* Foundation.framework */; };
@@ -35,6 +36,8 @@
 		B090C4A516F19FE100CBC9E5 /* TwitterDeveloper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterDeveloper.h; sourceTree = "<group>"; };
 		B090C4A616F19FE100CBC9E5 /* TwitterDeveloper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterDeveloper.m; sourceTree = "<group>"; };
 		B09574C216E8059A00EFDBB2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B097B69D16F97C96008C7FBD /* MapTwitterDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapTwitterDetailViewController.h; sourceTree = "<group>"; };
+		B097B69E16F97C96008C7FBD /* MapTwitterDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapTwitterDetailViewController.m; sourceTree = "<group>"; };
 		B0A6687916F51BDA009C9875 /* MapTwitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapTwitter.png; sourceTree = SOURCE_ROOT; };
 		B0AB6FB616E7F17100EB71F5 /* MapTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0AB6FB916E7F17100EB71F5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -128,6 +131,8 @@
 				B0AB6FD116E7F17100EB71F5 /* MainStoryboard.storyboard */,
 				B0AB6FD416E7F17100EB71F5 /* MapTwitterViewController.h */,
 				B0AB6FD516E7F17100EB71F5 /* MapTwitterViewController.m */,
+				B097B69D16F97C96008C7FBD /* MapTwitterDetailViewController.h */,
+				B097B69E16F97C96008C7FBD /* MapTwitterDetailViewController.m */,
 				B0AB6FC016E7F17100EB71F5 /* Supporting Files */,
 			);
 			path = MapTwitter;
@@ -221,6 +226,7 @@
 				B0AB6FD616E7F17100EB71F5 /* MapTwitterViewController.m in Sources */,
 				B090C4A716F19FE100CBC9E5 /* TwitterDeveloper.m in Sources */,
 				B0015E1216F262100068C0EB /* Tweet.m in Sources */,
+				B097B69F16F97C96008C7FBD /* MapTwitterDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

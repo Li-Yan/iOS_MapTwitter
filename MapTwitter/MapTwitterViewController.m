@@ -16,6 +16,7 @@
 
 @synthesize tweets;
 @synthesize myCoordinate;
+@synthesize tagArray;
 
 - (void)viewDidLoad
 {
@@ -25,6 +26,7 @@
     [self initMapView];
     
     self.tweets = [[NSMutableDictionary alloc] init];
+    self.tagArray = [[NSMutableArray alloc] init];
 }
 
 -(void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
@@ -47,6 +49,7 @@
     if ([self.tweets objectForKey:tweet.id_str] == nil)
     {
         [self.tweets setObject:tweet forKey:tweet.id_str];
+        [self.tagArray addObject:tweet.id_str];
     }
 }
 
@@ -165,6 +168,8 @@
         // Button
         UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         [button setFrame:CGRectMake(0, 0, 23, 23)];
+        [button setTag:[self.tagArray indexOfObject:((Tweet *)annotation).id_str]];
+        [button addTarget:self action:@selector(tweetDetail:) forControlEvents:UIControlEventTouchUpInside];
         annotationView.rightCalloutAccessoryView = button;
         
         // Image and two labels
@@ -180,6 +185,14 @@
         return annotationView;
     }
     return nil;
+}
+
+- (void)tweetDetail:(id)sender
+{
+    NSString *key = [self.tagArray objectAtIndex:((UIButton *)sender).tag];
+    Tweet *tweet = [self.tweets objectForKey:key];
+    MapTwitterDetailViewController *detailViewController = [[MapTwitterDetailViewController alloc] initWithTweet:tweet];
+    [self presentViewController:detailViewController animated:YES completion:nil];
 }
 
 @end
