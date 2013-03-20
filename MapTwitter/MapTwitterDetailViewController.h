@@ -15,7 +15,9 @@
 @property (nonatomic, strong) Tweet *tweet;
 
 @property (strong, nonatomic) IBOutlet UIView *view;
+@property (strong, nonatomic) IBOutlet UITextField *textField;
 
 - (MapTwitterDetailViewController *)initWithTweet:(Tweet *)init_tweet;
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 
 @end
