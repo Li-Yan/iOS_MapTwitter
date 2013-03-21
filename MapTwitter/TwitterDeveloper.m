@@ -18,8 +18,6 @@
 - (TwitterDeveloper *)initAsDeveloper
 {
     self = [super init];
-    [self setConsumer_key:@"j1tFd2R0ww5S5ikVbaZNew"];
-    [self setConsumer_secret:@"dDVPgML8W9aaSzX3UFSLeYNLwpiWbJQWpES62yz1kGA"];
     [self setAccess_token:@"736530565-wGvNFWsfY7e1AD2dKLWWqgwv1mEhmaJbawZQYrez"];
     [self setAccess_token_secret:@"icvZECvQ8w9UJrXWsFvVheeV8FcmfiiHnmyHGkNTxGI"];
     return self;
