@@ -36,10 +36,12 @@ static NSMutableDictionary *tweets;
 -(void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
 {
     [self fetchTweets];
+    [self checkFavorite];
+    [self checkRetweet];
     dispatch_async(dispatch_get_main_queue(), ^{[self PlaceTweetsPin];});
     
-    NSThread *updateThread = [[NSThread alloc] initWithTarget:self selector:@selector(updateTweets) object:nil];
-    [updateThread start];
+    //NSThread *updateThread = [[NSThread alloc] initWithTarget:self selector:@selector(updateTweets) object:nil];
+    //[updateThread start];
 }
 
 - (void)didReceiveMemoryWarning
@@ -155,6 +157,32 @@ static NSMutableDictionary *tweets;
     }
 }
 
+- (void)checkRetweet
+{
+    NSData *retweetData = [self.developer timeLine];
+    NSError *error = nil;
+    NSDictionary *retweetDic = [NSJSONSerialization JSONObjectWithData:retweetData options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&error];
+    NSString *errorString = [[NSString alloc] initWithFormat:@"%@", retweetDic];
+    if ([errorString rangeOfString:@"error" options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        NSLog(@"%d", [errorString rangeOfString:@"error" options:NSCaseInsensitiveSearch].location);
+        return;
+    }
+    for (NSDictionary *subDic in retweetDic)
+    {
+        NSDictionary *retweeted_statusDic = [subDic objectForKey:@"retweeted_status"];
+        if (retweeted_statusDic != nil)
+        {
+            NSString *id_str = [retweeted_statusDic objectForKey:@"id_str"];
+            Tweet *tweet = [tweets objectForKey:id_str];
+            if (tweet != nil)
+            {
+                [MapTwitterViewController setRetweetState:tweet State:true];
+            }
+        }
+    }
+}
+
 - (void)checkTweetsNum
 {
     NSArray *keys = [tweets allKeys];
@@ -170,7 +198,6 @@ static NSMutableDictionary *tweets;
     while (true) {
         [self fetchTweets];
         [self checkTweetsNum];
-        [self checkFavorite];
         dispatch_async(dispatch_get_main_queue(), ^{[self PlaceTweetsPin];});
         sleep(60);
     }
@@ -240,6 +267,7 @@ static NSMutableDictionary *tweets;
 - (void)tweetDetail:(id)sender
 {
     NSString *key = [self.tagArray objectAtIndex:((UIButton *)sender).tag];
+    NSLog(@"%@", key);
     Tweet *tweet = [tweets objectForKey:key];
     MapTwitterDetailViewController *detailViewController = [[MapTwitterDetailViewController alloc] initWithTweet:tweet];
     [self presentViewController:detailViewController animated:YES completion:nil];
