@@ -16,6 +16,13 @@
 
 @synthesize tweet;
 @synthesize developer;
+@synthesize sideBlank;
+@synthesize up_downBlank;
+@synthesize horizontalBlank;
+@synthesize verticalBlank;
+@synthesize screenSize;
+@synthesize buttonSize;
+@synthesize currentHeight;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,15 +49,15 @@
     self.view = [[UIView alloc] initWithFrame:[[UIScreen alloc] applicationFrame]];
     [self.view setBackgroundColor:[UIColor colorWithRed:191/255.0f green:237/255.0f blue:255/255.0f alpha:1]];
     
-    double sideBlank = 17;
-    double up_downBlank = 3;
-    double horizontalBlank = 3;
-    double verticalBlank = 3;
-    double currentHeight = up_downBlank;
+    sideBlank = 17;
+    up_downBlank = 3;
+    horizontalBlank = 3;
+    verticalBlank = 3;
+    currentHeight = up_downBlank;
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     CGFloat screenScale = [[UIScreen mainScreen] scale];
-    CGSize screenSize = CGSizeMake(screenBounds.size.width * screenScale, screenBounds.size.height * screenScale);
+    screenSize = CGSizeMake(screenBounds.size.width * screenScale, screenBounds.size.height * screenScale);
     
     //"Tweet Detail label"
     double titleLabelWidth = screenSize.width - 2 * sideBlank;
@@ -119,8 +126,10 @@
     */
     
     //buttons
-    double buttonWidth = 27;
-    double buttonHeight = 27;
+    self.buttonSize = 27;
+    double buttonWidth = self.buttonSize;
+    double buttonHeight = self.buttonSize;
+    double buttonScale = 1;
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
     [backButton setFrame:CGRectMake(3 * sideBlank, currentHeight + (screenSize.height - currentHeight - buttonHeight - verticalBlank) / 2 - 2 * up_downBlank, buttonWidth, buttonHeight)];
@@ -132,10 +141,19 @@
     [self.retweetButton setFrame:CGRectMake(screenSize.width - 3 * sideBlank - buttonWidth, currentHeight + (screenSize.height - currentHeight - buttonHeight - verticalBlank) / 2 - 2 * up_downBlank, buttonWidth, buttonHeight)];
     [self.retweetButton addTarget:self action:@selector(retweet:) forControlEvents:UIControlEventTouchUpInside];
     
+    //favorite button
     self.favoriteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    if (!tweet.favorited) [self.favoriteButton setBackgroundImage:[UIImage imageNamed:@"favorite.png"] forState:UIControlStateNormal];
-    else [self.favoriteButton setBackgroundImage:[UIImage imageNamed:@"favorited.png"] forState:UIControlStateNormal];
-    [self.favoriteButton setFrame:CGRectMake((screenSize.width - 2 * buttonWidth) / 2, currentHeight + (screenSize.height - currentHeight - 2 * buttonHeight - verticalBlank) / 2 - 2 * up_downBlank, 2 * buttonWidth, 2 * buttonHeight)];
+    if (!tweet.favorited)
+    {
+        [self.favoriteButton setBackgroundImage:[UIImage imageNamed:@"favorite.png"] forState:UIControlStateNormal];
+        buttonScale = 1;
+    }
+    else
+    {
+        [self.favoriteButton setBackgroundImage:[UIImage imageNamed:@"favorited.png"] forState:UIControlStateNormal];
+        buttonScale = 3;
+    }
+    [self.favoriteButton setFrame:CGRectMake((screenSize.width - buttonScale * buttonWidth) / 2, currentHeight + (screenSize.height - currentHeight - buttonScale * buttonHeight - verticalBlank) / 2 - 2 * up_downBlank, buttonScale * buttonWidth, buttonScale * buttonHeight)];
     [self.favoriteButton addTarget:self action:@selector(favorite:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:titleLabel];
@@ -181,8 +199,12 @@
 - (void)favorite:(id)sender
 {
     NSString *messageString = [[NSString alloc] init];
+    double buttonWidth = self.buttonSize;
+    double buttonHeight = self.buttonSize;
+    double buttonScale = 1;
     if (!tweet.favorited)
     {
+        buttonScale = 3;
         [developer favorite:tweet.id_str Is_Create:true];
         tweet.favorited = true;
         messageString = @"Add to Favority!";
@@ -191,12 +213,14 @@
     }
     else
     {
+        buttonScale = 1;
         [developer favorite:tweet.id_str Is_Create:false];
         tweet.favorited = false;
         messageString = @"Remove from Favority!";
         [MapTwitterViewController setFavoriteState:tweet State:false];
         [self.favoriteButton setBackgroundImage:[UIImage imageNamed:@"favorite.png"] forState:UIControlStateNormal];
     }
+    [self.favoriteButton setFrame:CGRectMake((screenSize.width - buttonScale * buttonWidth) / 2, currentHeight + (screenSize.height - currentHeight - buttonScale * buttonHeight - verticalBlank) / 2 - 2 * up_downBlank, buttonScale * buttonWidth, buttonScale * buttonHeight)];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Favorite Message" message:messageString delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
     [alertView show];
 }

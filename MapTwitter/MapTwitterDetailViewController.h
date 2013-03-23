@@ -17,6 +17,13 @@
 @property (nonatomic, strong) Tweet *tweet;
 @property (nonatomic, strong) TwitterDeveloper *developer;
 
+@property CGSize screenSize;
+@property double buttonSize;
+@property double currentHeight;
+@property double sideBlank;
+@property double up_downBlank;
+@property double horizontalBlank;
+@property double verticalBlank;
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 @property (strong, nonatomic) IBOutlet UITextView *textView;

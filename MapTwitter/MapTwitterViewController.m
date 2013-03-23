@@ -267,7 +267,6 @@ static NSMutableDictionary *tweets;
 - (void)tweetDetail:(id)sender
 {
     NSString *key = [self.tagArray objectAtIndex:((UIButton *)sender).tag];
-    NSLog(@"%@", key);
     Tweet *tweet = [tweets objectForKey:key];
     MapTwitterDetailViewController *detailViewController = [[MapTwitterDetailViewController alloc] initWithTweet:tweet];
     [self presentViewController:detailViewController animated:YES completion:nil];
