@@ -36,6 +36,7 @@ static NSMutableDictionary *tweets;
 -(void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
 {
     [self fetchTweets];
+    [self checkTweetsNum];
     dispatch_async(dispatch_get_main_queue(), ^{[self PlaceTweetsPin];});
     
     NSThread *updateThread = [[NSThread alloc] initWithTarget:self selector:@selector(updateTweets) object:nil];
