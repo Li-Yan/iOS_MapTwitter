@@ -36,12 +36,12 @@ static NSMutableDictionary *tweets;
 -(void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
 {
     [self fetchTweets];
+    dispatch_async(dispatch_get_main_queue(), ^{[self PlaceTweetsPin];});
     [self checkFavorite];
     [self checkRetweet];
-    dispatch_async(dispatch_get_main_queue(), ^{[self PlaceTweetsPin];});
     
-    //NSThread *updateThread = [[NSThread alloc] initWithTarget:self selector:@selector(updateTweets) object:nil];
-    //[updateThread start];
+    NSThread *updateThread = [[NSThread alloc] initWithTarget:self selector:@selector(updateTweets) object:nil];
+    [updateThread start];
 }
 
 - (void)didReceiveMemoryWarning
