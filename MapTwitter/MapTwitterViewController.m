@@ -37,8 +37,6 @@ static NSMutableDictionary *tweets;
 {
     [self fetchTweets];
     dispatch_async(dispatch_get_main_queue(), ^{[self PlaceTweetsPin];});
-    [self checkFavorite];
-    [self checkRetweet];
     
     NSThread *updateThread = [[NSThread alloc] initWithTarget:self selector:@selector(updateTweets) object:nil];
     [updateThread start];
@@ -195,6 +193,9 @@ static NSMutableDictionary *tweets;
 
 - (void)updateTweets
 {
+    [self checkFavorite];
+    [self checkRetweet];
+    
     while (true) {
         [self fetchTweets];
         [self checkTweetsNum];

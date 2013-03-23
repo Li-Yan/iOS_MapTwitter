@@ -100,7 +100,7 @@
     
     double timeLabelWidth = screenSize.width - 2 * sideBlank - horizontalBlank;
     double timeLabelHeight = screenSize.height / 25;
-    UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(sideBlank, currentHeight + verticalBlank, timeLabelWidth, timeLabelHeight)];
+    UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(sideBlank, currentHeight + 2 *  verticalBlank, timeLabelWidth, timeLabelHeight)];
     [timeLabel setText:tweet.timeStamp];
     [timeLabel setFont:[UIFont fontWithName:@"Arial" size:(13.0f)]];
     [timeLabel setTextAlignment:NSTextAlignmentCenter];
