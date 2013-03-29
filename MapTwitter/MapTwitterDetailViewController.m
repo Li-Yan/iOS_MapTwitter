@@ -56,7 +56,7 @@
     currentHeight = up_downBlank;
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    CGFloat screenScale = [[UIScreen mainScreen] scale];
+    CGFloat screenScale = [[UIScreen mainScreen] scale] / 2;
     screenSize = CGSizeMake(screenBounds.size.width * screenScale, screenBounds.size.height * screenScale);
     
     //"Tweet Detail label"

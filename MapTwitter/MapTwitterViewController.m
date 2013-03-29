@@ -81,8 +81,8 @@ static NSMutableDictionary *tweets;
     [locationManager startUpdatingLocation];
     
     CLLocationCoordinate2D coordinate2D = locationManager.location.coordinate;
-    coordinate2D.latitude = New_York_Latitude;
-    coordinate2D.longitude = New_York_Longitude;
+    //coordinate2D.latitude = New_York_Latitude;
+    //coordinate2D.longitude = New_York_Longitude;
     self.myCoordinate = coordinate2D;
     
     MKCoordinateSpan mySpan;
